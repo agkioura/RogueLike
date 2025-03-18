@@ -7,6 +7,6 @@
 
 [node name="Player" parent="." instance=ExtResource("2_vvim3")]
 z_index = 1000
-position = Vector2(54, 62)
+position = Vector2(9, 70)
 
 [node name="room1" parent="." instance=ExtResource("2_oc4eo")]
