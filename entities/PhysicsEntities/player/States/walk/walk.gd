@@ -1,8 +1,6 @@
 class_name Walk extends State
 
 @export var idle : State
-@export var attack : State
-@export var dash : State
 
 @export var moveSpeed : int = 50
 
@@ -17,10 +15,6 @@ func exitState() -> void:
 func processInput(event : InputEvent) -> State:
 	if !Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down"):
 		return idle
-	if Input.is_action_just_pressed("attack"):
-		return attack
-	if Input.is_action_just_pressed("dash") && parent.canDash:
-		return dash
 	return null
 	
 func processPhysics(delta: float) -> State:

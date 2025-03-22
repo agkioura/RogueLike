@@ -1,28 +1,27 @@
 extends PhysicsEnity
 
 @onready var animation = $AnimationPlayer
-@onready var dashTimer = $dashCooldown
-@onready var stateMachine = $StateMachine
+@onready var moveStateMachine = $MovementStateMachine
+@onready var attackStateMachine = $AttackStateMachine
 
 var facing = "down"
 var facingDirection : Vector2
-var canDash = true
 
 func _init() -> void:
 	super("aids")
 
 func _ready() -> void:
-	stateMachine.initialize(self)
+	moveStateMachine.initialize(self)
+	attackStateMachine.initialize(self)
 
 func _unhandled_input(event: InputEvent) -> void:
-	stateMachine.processInput(event)
+	moveStateMachine.processInput(event)
+	attackStateMachine.processInput(event)
 	
 func _physics_process(delta: float) -> void:
-	stateMachine.processPhysics(delta)
+	moveStateMachine.processPhysics(delta)
+	attackStateMachine.processPhysics(delta)
 	
 func _process(delta: float) -> void:
-	stateMachine.processFrame(delta)
-	
-
-func _on_dash_cooldown_timeout() -> void:
-	canDash = true
+	moveStateMachine.processFrame(delta)
+	attackStateMachine.processFrame(delta)
