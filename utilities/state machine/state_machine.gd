@@ -5,9 +5,9 @@ extends Node2D
 var startingState : State
 var currentState : State
 
-func initialize(player: Player):
+func initialize(parent: PhysicsEnity):
 	for child in get_children():
-		child.parent = player
+		child.parent = parent
 	changeState(startingState)
 
 func changeState(newState : State) -> void:

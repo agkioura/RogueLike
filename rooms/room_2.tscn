@@ -1,9 +1,9 @@
 [gd_scene load_steps=12 format=4 uid="uid://b8o2r7dt7oikd"]
 
-[ext_resource type="Texture2D" uid="uid://bhq6v3ykpgpmm" path="res://assets/Objects/Wall.png" id="1_f2xid"]
-[ext_resource type="Texture2D" uid="uid://b1q73h7jpyb6u" path="res://assets/Objects/Floor.png" id="2_ajgw6"]
-[ext_resource type="Texture2D" uid="uid://b0fcodcl7yh1g" path="res://assets/Objects/Decor0.png" id="3_q8co1"]
-[ext_resource type="Texture2D" uid="uid://c1jbcqi7jq3uk" path="res://assets/Objects/Decor1.png" id="4_6gieo"]
+[ext_resource type="Texture2D" uid="uid://d0cpieyayqh0o" path="res://assets/Objects/Wall.png" id="1_f2xid"]
+[ext_resource type="Texture2D" uid="uid://42pe4j6evoxm" path="res://assets/Objects/Floor.png" id="2_ajgw6"]
+[ext_resource type="Texture2D" uid="uid://kakkelhaxx4q" path="res://assets/Objects/Decor0.png" id="3_q8co1"]
+[ext_resource type="Texture2D" uid="uid://b6vpglt6kebd" path="res://assets/Objects/Decor1.png" id="4_6gieo"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_a15cs"]
 texture = ExtResource("1_f2xid")

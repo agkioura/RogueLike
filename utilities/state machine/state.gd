@@ -3,7 +3,7 @@ extends Node2D
 
 
 @export var animationName : String 
-var parent: Player
+var parent: PhysicsEnity
 
 func enterState() -> void:
 	pass

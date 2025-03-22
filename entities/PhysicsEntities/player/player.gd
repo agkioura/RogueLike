@@ -1,5 +1,4 @@
-class_name Player 
-extends CharacterBody2D
+extends PhysicsEnity
 
 @onready var animation = $AnimationPlayer
 @onready var dashTimer = $dashCooldown
@@ -8,6 +7,9 @@ extends CharacterBody2D
 var facing = "down"
 var facingDirection : Vector2
 var canDash = true
+
+func _init() -> void:
+	super("aids")
 
 func _ready() -> void:
 	stateMachine.initialize(self)

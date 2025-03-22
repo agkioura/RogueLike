@@ -1,12 +1,12 @@
 [gd_scene load_steps=24 format=3 uid="uid://dopx06yy437aa"]
 
-[ext_resource type="Script" path="res://player/player.gd" id="1_xxrmx"]
+[ext_resource type="Script" path="res://entities/PhysicsEntities/player/player.gd" id="1_xxrmx"]
 [ext_resource type="Texture2D" uid="uid://du7415gkawk7m" path="res://assets/Commissions/Rogue.png" id="2_wmfjr"]
 [ext_resource type="PackedScene" uid="uid://cert0vcaupr07" path="res://utilities/state machine/state_machine.tscn" id="3_ywb0m"]
-[ext_resource type="PackedScene" uid="uid://divlo1p11l0dq" path="res://player/States/idle/idle.tscn" id="4_8ui45"]
-[ext_resource type="PackedScene" uid="uid://cmj02vkwe0vdd" path="res://player/States/walk/walk.tscn" id="5_kwbrq"]
-[ext_resource type="PackedScene" uid="uid://bwh8l57nscl0k" path="res://player/States/attack/attack.tscn" id="6_lu07g"]
-[ext_resource type="PackedScene" uid="uid://dhd8fd2ahwg6n" path="res://player/States/dash/dash.tscn" id="7_bvkjf"]
+[ext_resource type="PackedScene" uid="uid://divlo1p11l0dq" path="res://entities/PhysicsEntities/player/States/idle/idle.tscn" id="4_8ui45"]
+[ext_resource type="PackedScene" uid="uid://cmj02vkwe0vdd" path="res://entities/PhysicsEntities/player/States/walk/walk.tscn" id="5_kwbrq"]
+[ext_resource type="PackedScene" uid="uid://bwh8l57nscl0k" path="res://entities/PhysicsEntities/player/States/attack/attack.tscn" id="6_lu07g"]
+[ext_resource type="PackedScene" uid="uid://dhd8fd2ahwg6n" path="res://entities/PhysicsEntities/player/States/dash/dash.tscn" id="7_bvkjf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1ecgh"]
 size = Vector2(12, 10)
