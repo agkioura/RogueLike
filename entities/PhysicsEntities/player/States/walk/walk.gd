@@ -13,12 +13,12 @@ func exitState() -> void:
 	parent.animation.stop()
 	
 func processInput(event : InputEvent) -> State:
-	if !Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down"):
+	if !Input.get_vector("left", "right", "up", "down"):
 		return idle
 	return null
 	
 func processPhysics(delta: float) -> State:
-	var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	var direction = Input.get_vector("left", "right", "up", "down")
 	if direction == Vector2.ZERO:
 		return idle
 	parent.facingDirection = direction
