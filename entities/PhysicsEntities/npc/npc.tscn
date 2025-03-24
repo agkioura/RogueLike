@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://eantyxvqtsvp"]
+
+[ext_resource type="Script" path="res://entities/PhysicsEntities/npc/npc.gd" id="1_ihfay"]
+[ext_resource type="Texture2D" uid="uid://dvw10gw0od5ar" path="res://assets/Characters/Humanoid0.png" id="2_vunmd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i25br"]
+size = Vector2(7, 10)
+
+[node name="Npc" type="CharacterBody2D"]
+script = ExtResource("1_ihfay")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_vunmd")
+hframes = 8
+vframes = 27
+frame = 23
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 2)
+shape = SubResource("RectangleShape2D_i25br")

@@ -224,6 +224,7 @@ position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_1ecgh")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+y_sort_enabled = true
 texture = ExtResource("2_wmfjr")
 hframes = 4
 vframes = 4
