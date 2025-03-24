@@ -10,6 +10,6 @@ func enterState() -> void:
 	print("Entered idle state")
 	
 func processInput(event: InputEvent) -> State:
-	if Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down"):
+	if Input.get_vector("left", "right", "up", "down"):
 		return walk
 	return null

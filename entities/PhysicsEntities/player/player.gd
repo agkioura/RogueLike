@@ -1,6 +1,7 @@
 extends PhysicsEnity
 
 @onready var animation = $AnimationPlayer
+@onready var weapon = $Weapon
 @onready var moveStateMachine = $MovementStateMachine
 @onready var attackStateMachine = $AttackStateMachine
 
