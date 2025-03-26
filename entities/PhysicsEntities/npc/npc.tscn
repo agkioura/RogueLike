@@ -1,13 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://eantyxvqtsvp"]
+[gd_scene load_steps=7 format=3 uid="uid://eantyxvqtsvp"]
 
 [ext_resource type="Script" path="res://entities/PhysicsEntities/npc/npc.gd" id="1_ihfay"]
+[ext_resource type="PackedScene" uid="uid://fnaly4wbnhwf" path="res://utilities/Components/Health Component/health_component.tscn" id="2_2s7nr"]
 [ext_resource type="Texture2D" uid="uid://dvw10gw0od5ar" path="res://assets/Characters/Humanoid0.png" id="2_vunmd"]
+[ext_resource type="PackedScene" uid="uid://d2m1cfvio00nm" path="res://utilities/Components/Hitbox Component/hitbox_component.tscn" id="4_aaa53"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i25br"]
 size = Vector2(7, 10)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i3h1v"]
+size = Vector2(12, 15)
+
 [node name="Npc" type="CharacterBody2D"]
 script = ExtResource("1_ihfay")
+
+[node name="HealthComponent" parent="." instance=ExtResource("2_2s7nr")]
+maxHealth = 100.0
+health = 78.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_vunmd")
@@ -16,5 +25,27 @@ vframes = 27
 frame = 23
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(-0.5, 2)
 shape = SubResource("RectangleShape2D_i25br")
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("4_aaa53")]
+visible = false
+healthComponent = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_i3h1v")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+offset_left = -31.0
+offset_top = -33.0
+offset_right = 31.0
+offset_bottom = -10.0
+
+[node name="Label" type="Label" parent="CenterContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "100/100"
+horizontal_alignment = 3
+vertical_alignment = 3

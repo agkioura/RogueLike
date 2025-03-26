@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://dopx06yy437aa"]
+[gd_scene load_steps=26 format=3 uid="uid://dopx06yy437aa"]
 
 [ext_resource type="Script" path="res://entities/PhysicsEntities/player/player.gd" id="1_xxrmx"]
 [ext_resource type="PackedScene" uid="uid://cg82e1r8ck2jg" path="res://entities/PhysicsEntities/weapon/weapon.tscn" id="2_ex24v"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://utilities/state machine/state_machine.gd" id="7_smaxu"]
 [ext_resource type="PackedScene" uid="uid://cbje0cw0y0gy6" path="res://entities/PhysicsEntities/player/States/attack/not_attacking.tscn" id="8_itlni"]
 [ext_resource type="Script" path="res://entities/PhysicsEntities/player/States/attack/attack.gd" id="8_sdc6f"]
+[ext_resource type="PackedScene" uid="uid://cm6xw7jnqxf4g" path="res://utilities/Components/Attack Component/attack_component.tscn" id="10_nqw0w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1ecgh"]
 size = Vector2(12, 10)
@@ -262,4 +263,9 @@ weapon = NodePath("../../Weapon")
 [node name="notAttacking" parent="AttackStateMachine" node_paths=PackedStringArray("attack") instance=ExtResource("8_itlni")]
 attack = NodePath("../attack")
 
-[node name="Weapon" parent="." instance=ExtResource("2_ex24v")]
+[node name="Weapon" parent="." node_paths=PackedStringArray("attack") instance=ExtResource("2_ex24v")]
+type = "basic"
+attack = NodePath("AttackComponent")
+
+[node name="AttackComponent" parent="Weapon" instance=ExtResource("10_nqw0w")]
+dmg = 12.0
