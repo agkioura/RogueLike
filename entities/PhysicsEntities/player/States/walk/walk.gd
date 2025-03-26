@@ -24,10 +24,12 @@ func processPhysics(delta: float) -> State:
 	parent.facingDirection = direction
 	parent.velocity = direction * moveSpeed
 	
+	var mouse_position = get_global_mouse_position()
 	var facing = "down"
-	if parent.velocity.y < 0: facing = "up"
-	elif parent.velocity.x > 0: facing = "right"
-	elif parent.velocity.x < 0: facing = "left"
+	if mouse_position.x - global_position.x < 0:
+		facing = "left"
+	else:
+		facing = "right"
 	animationName = facing + "_walk"
 	parent.facing = facing
 	parent.animation.play(animationName)

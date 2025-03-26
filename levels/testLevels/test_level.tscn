@@ -7,14 +7,14 @@
 [node name="TestLevel" type="Node2D"]
 y_sort_enabled = true
 
+[node name="room1" parent="." instance=ExtResource("2_oc4eo")]
+
 [node name="Player" parent="." instance=ExtResource("2_vvim3")]
-z_index = 101
+z_index = 1
 y_sort_enabled = true
 position = Vector2(9, 70)
 
-[node name="room1" parent="." instance=ExtResource("2_oc4eo")]
-
 [node name="Npc" parent="." instance=ExtResource("3_l5saw")]
-z_index = 101
+z_index = 1
 y_sort_enabled = true
 position = Vector2(65, 48)

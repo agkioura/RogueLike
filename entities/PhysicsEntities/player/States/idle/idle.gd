@@ -13,3 +13,14 @@ func processInput(event: InputEvent) -> State:
 	if Input.get_vector("left", "right", "up", "down"):
 		return walk
 	return null
+	
+func processFrame(delta: float):
+	var mouse_position = get_global_mouse_position()
+	var facing = "down"
+	if mouse_position.x - global_position.x < 0:
+		facing = "left"
+	else:
+		facing = "right"
+	animationName = facing + "_idle"
+	parent.facing = facing
+	parent.animation.play(animationName)

@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://entities/PhysicsEntities/weapon/weapon.gd" id="1_b1djg"]
 [ext_resource type="Texture2D" uid="uid://crcwgua8m8bv6" path="res://assets/Items/MedWep.png" id="2_qmhw1"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2fdnm"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ahw3q"]
 size = Vector2(12, 4)
 
 [sub_resource type="Animation" id="Animation_lvhtp"]
@@ -31,6 +31,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Pivot/Sprite2D/Area2D/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_7jbs7"]
@@ -60,6 +72,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [true, false]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Pivot/Sprite2D/Area2D/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.166667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_aj060"]
 _data = {
@@ -84,13 +108,16 @@ hframes = 8
 vframes = 2
 
 [node name="Area2D" type="Area2D" parent="Pivot/Sprite2D"]
-rotation = 0.785398
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/Sprite2D/Area2D"]
-position = Vector2(14.1421, 0)
-shape = SubResource("RectangleShape2D_2fdnm")
+position = Vector2(9.89949, 9.8995)
+rotation = 0.785398
+shape = SubResource("RectangleShape2D_ahw3q")
+disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_aj060")
 }
+
+[connection signal="area_entered" from="Pivot/Sprite2D/Area2D" to="." method="_on_area_2d_area_entered"]
