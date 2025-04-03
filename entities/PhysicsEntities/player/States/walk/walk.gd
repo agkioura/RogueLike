@@ -25,13 +25,11 @@ func processPhysics(delta: float) -> State:
 	parent.velocity = direction * moveSpeed
 	
 	var mouse_position = get_global_mouse_position()
-	var facing = "down"
 	if mouse_position.x - global_position.x < 0:
-		facing = "left"
+		if ($"../../PlayerSprite".scale.x == 1):
+			$"../../PlayerSprite".scale.x *= -1
 	else:
-		facing = "right"
-	animationName = facing + "_walk"
-	parent.facing = facing
-	parent.animation.play(animationName)
+		if ($"../../PlayerSprite".scale.x == -1):
+			$"../../PlayerSprite".scale.x *= -1
 	parent.move_and_slide()
 	return null

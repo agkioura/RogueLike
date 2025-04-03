@@ -1,24 +1,24 @@
 [gd_scene load_steps=7 format=3 uid="uid://cg82e1r8ck2jg"]
 
 [ext_resource type="Script" path="res://entities/PhysicsEntities/weapon/weapon.gd" id="1_b1djg"]
-[ext_resource type="Texture2D" uid="uid://crcwgua8m8bv6" path="res://assets/Items/MedWep.png" id="2_qmhw1"]
+[ext_resource type="Texture2D" uid="uid://raupcnb1jv5p" path="res://assets/Test Sprites/weapons.png" id="2_cv35d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ahw3q"]
-size = Vector2(12, 4)
+size = Vector2(12, 5)
 
 [sub_resource type="Animation" id="Animation_lvhtp"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Pivot/Sprite2D:rotation")
+tracks/0/path = NodePath("Pivot/Sprite2D/Area2D/CollisionShape2D:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.785398]
+"update": 1,
+"values": [true]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -35,14 +35,14 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Pivot/Sprite2D/Area2D/CollisionShape2D:disabled")
+tracks/2/path = NodePath("Pivot/Sprite2D:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
+"update": 0,
+"values": [0.0]
 }
 
 [sub_resource type="Animation" id="Animation_7jbs7"]
@@ -51,38 +51,38 @@ length = 0.200003
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Pivot/Sprite2D:rotation")
+tracks/0/path = NodePath("Pivot/Sprite2D:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.166667),
-"transitions": PackedFloat32Array(0.266159, 1),
-"update": 0,
-"values": [3.92699, 0.785398]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Pivot/Sprite2D:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.200003),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
 }
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Pivot/Sprite2D/Area2D/CollisionShape2D:disabled")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot/Sprite2D/Area2D/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.166667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Pivot/Sprite2D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.133333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-1.5708, 1.5708]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_aj060"]
@@ -95,23 +95,19 @@ _data = {
 script = ExtResource("1_b1djg")
 
 [node name="Pivot" type="Marker2D" parent="."]
-scale = Vector2(-1, -1)
 
 [node name="Sprite2D" type="Sprite2D" parent="Pivot"]
 visible = false
-rotation = 0.785398
-texture = ExtResource("2_qmhw1")
-centered = false
-flip_h = true
-flip_v = true
-hframes = 8
+position = Vector2(0, 0.5)
+texture = ExtResource("2_cv35d")
+offset = Vector2(13, 0)
 vframes = 2
+frame = 1
 
 [node name="Area2D" type="Area2D" parent="Pivot/Sprite2D"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/Sprite2D/Area2D"]
-position = Vector2(9.89949, 9.8995)
-rotation = 0.785398
+position = Vector2(15, -0.5)
 shape = SubResource("RectangleShape2D_ahw3q")
 disabled = true
 
