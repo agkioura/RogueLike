@@ -4,9 +4,8 @@ class_name Idle extends State
 
 func enterState() -> void:
 	super()
-	animationName = parent.facing + "_idle"
+	$"../../PlayerSprite".frame = 0;
 	parent.velocity = Vector2.ZERO
-	parent.animation.play(animationName)
 	print("Entered idle state")
 	
 func processInput(event: InputEvent) -> State:
@@ -16,11 +15,9 @@ func processInput(event: InputEvent) -> State:
 	
 func processFrame(delta: float):
 	var mouse_position = get_global_mouse_position()
-	var facing = "down"
 	if mouse_position.x - global_position.x < 0:
-		facing = "left"
+		if ($"../../PlayerSprite".scale.x == 1):
+			$"../../PlayerSprite".scale.x *= -1
 	else:
-		facing = "right"
-	animationName = facing + "_idle"
-	parent.facing = facing
-	parent.animation.play(animationName)
+		if ($"../../PlayerSprite".scale.x == -1):
+			$"../../PlayerSprite".scale.x *= -1

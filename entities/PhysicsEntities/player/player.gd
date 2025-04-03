@@ -1,17 +1,33 @@
 extends PhysicsEnity
 
+@export var weaponType: String
+
 @onready var animation = $AnimationPlayer
 @onready var weapon = $Weapon
 @onready var moveStateMachine = $MovementStateMachine
 @onready var attackStateMachine = $AttackStateMachine
 
-var facing = "down"
 var facingDirection : Vector2
+
+enum WEAPONS {
+	SWORD,
+	STAFF
+}
 
 func _init() -> void:
 	super("aids")
 
 func _ready() -> void:
+	var type: int 
+	match weaponType:
+		"sword":
+			type = WEAPONS.SWORD
+		"staff": 
+			type = WEAPONS.STAFF
+		_:
+			type = 0
+	weapon.type = type
+	$PlayerSprite/weaponSprite.frame = type
 	moveStateMachine.initialize(self)
 	attackStateMachine.initialize(self)
 

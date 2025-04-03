@@ -1,11 +1,13 @@
 class_name Weapon extends Node2D
 
-@export var type: String
 @onready var marker = $Pivot
 @onready var animation = $AnimationPlayer
+@onready var weaponSprite: Sprite2D = $Pivot/Sprite2D
 @export var attack: AttackComponent
+var type: int
 
 func use():
+	weaponSprite.frame = type
 	var mouse_position = get_global_mouse_position()
 	marker.look_at(mouse_position)
 	
