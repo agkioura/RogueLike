@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cg82e1r8ck2jg"]
+[gd_scene load_steps=8 format=3 uid="uid://cg82e1r8ck2jg"]
 
 [ext_resource type="Script" path="res://entities/PhysicsEntities/weapon/weapon.gd" id="1_b1djg"]
 [ext_resource type="Texture2D" uid="uid://raupcnb1jv5p" path="res://assets/Test Sprites/weapons.png" id="2_cv35d"]
@@ -46,8 +46,8 @@ tracks/2/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_7jbs7"]
-resource_name = "attack"
-length = 0.200003
+resource_name = "attack1"
+length = 0.233337
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -55,7 +55,7 @@ tracks/0/path = NodePath("Pivot/Sprite2D:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.166667),
+"times": PackedFloat32Array(0, 0.233333),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -79,16 +79,57 @@ tracks/2/path = NodePath("Pivot/Sprite2D:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.133333),
+"times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [-1.5708, 1.5708]
 }
 
+[sub_resource type="Animation" id="Animation_feqw5"]
+resource_name = "attack2"
+length = 0.233337
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.5708, -1.5708]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot/Sprite2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.233333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Pivot/Sprite2D/Area2D/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.166667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_aj060"]
 _data = {
 "RESET": SubResource("Animation_lvhtp"),
-"attack": SubResource("Animation_7jbs7")
+"attack1": SubResource("Animation_7jbs7"),
+"attack2": SubResource("Animation_feqw5")
 }
 
 [node name="Weapon" type="Node2D"]
@@ -102,7 +143,6 @@ position = Vector2(0, 0.5)
 texture = ExtResource("2_cv35d")
 offset = Vector2(13, 0)
 vframes = 2
-frame = 1
 
 [node name="Area2D" type="Area2D" parent="Pivot/Sprite2D"]
 

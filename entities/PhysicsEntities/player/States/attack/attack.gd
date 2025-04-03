@@ -2,6 +2,7 @@ class_name Attack extends State
 
 @export var notAttacking: State
 @export var weapon: Weapon
+var variation: int = 0
 
 var finished = false
 
@@ -10,7 +11,13 @@ func enterState() -> void:
 	$"../../PlayerSprite/weaponSprite".visible = false
 	animationName = "attack"
 	weapon.use()
-	weapon.animation.play(animationName)
+	if (variation == 0):
+		weapon.animation.play(animationName + str(1))
+		variation = 1
+	else:
+		weapon.animation.play(animationName + str(2))
+		variation = 0
+		
 	print("Entered attack state")
 	
 func exitState() -> void:
