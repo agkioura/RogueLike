@@ -1,4 +1,4 @@
-extends PhysicsEnity
+class_name Player extends PhysicsEnity
 
 @export var weaponType: String
 
