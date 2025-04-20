@@ -7,7 +7,6 @@ class_name Walk extends State
 func enterState() -> void:
 	super()
 	parent.animation.play(animationName)
-	print("Entered walk state")
 	
 func exitState() -> void:
 	parent.animation.stop()

@@ -6,7 +6,6 @@ func enterState() -> void:
 	super()
 	$"../../PlayerSprite".frame = 0;
 	parent.velocity = Vector2.ZERO
-	print("Entered idle state")
 	
 func processInput(event: InputEvent) -> State:
 	if Input.get_vector("left", "right", "up", "down"):

@@ -10,15 +10,13 @@ func enterState() -> void:
 	super()
 	$"../../PlayerSprite/weaponSprite".visible = false
 	animationName = "attack"
-	weapon.use()
+	weapon.use(get_global_mouse_position())
 	if (variation == 0):
 		weapon.animation.play(animationName + str(1))
 		variation = 1
 	else:
 		weapon.animation.play(animationName + str(2))
 		variation = 0
-		
-	print("Entered attack state")
 	
 func exitState() -> void:
 	$"../../PlayerSprite/weaponSprite".visible = true
