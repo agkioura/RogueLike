@@ -1,5 +1,6 @@
 extends PhysicsEnity
 
+
 @onready var stateMachine: StateMachine = $StateMachine
 @onready var label: Label = $CenterContainer/Label
 @onready var health: HealthComponent = $HealthComponent

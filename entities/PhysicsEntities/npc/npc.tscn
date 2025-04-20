@@ -12,7 +12,9 @@
 radius = 5.59017
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_86qnn"]
+
 radius = 62.3939
+
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i3h1v"]
 size = Vector2(12, 15)
@@ -31,7 +33,6 @@ vframes = 27
 frame = 23
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(-0.5, 2)
 shape = SubResource("CircleShape2D_ws41j")
 
@@ -73,6 +74,7 @@ chase = NodePath("../Chase")
 script = ExtResource("7_eqguu")
 patrol = NodePath("../Patrol")
 
+
 [node name="PatrolWaitTimer" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
@@ -91,3 +93,4 @@ debug_enabled = true
 [connection signal="timeout" from="PatrolWaitTimer" to="StateMachine/Patrol" method="_on_patrol_wait_timer_timeout"]
 [connection signal="timeout" from="PathTimer" to="StateMachine/Chase" method="_on_path_timer_timeout"]
 [connection signal="navigation_finished" from="NavigationAgent2D" to="StateMachine/Patrol" method="_on_navigation_agent_2d_navigation_finished"]
+
