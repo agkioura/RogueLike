@@ -11,14 +11,10 @@ y_sort_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("2_vvim3")]
 z_index = 1
-position = Vector2(-22, 74)
+y_sort_enabled = true
+position = Vector2(9, 64)
 
 [node name="Npc" parent="." instance=ExtResource("3_l5saw")]
 z_index = 1
 y_sort_enabled = true
-position = Vector2(56, 64)
-
-[node name="Npc2" parent="." instance=ExtResource("3_l5saw")]
-z_index = 1
-y_sort_enabled = true
-position = Vector2(-86, -6)
+position = Vector2(67, 47)

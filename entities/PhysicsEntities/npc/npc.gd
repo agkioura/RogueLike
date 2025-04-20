@@ -1,10 +1,10 @@
 extends PhysicsEnity
 
-@onready var stateMachine = $StateMachine
-@onready var label = $CenterContainer/Label
-@onready var health = $HealthComponent
+@onready var stateMachine: StateMachine = $StateMachine
+@onready var label: Label = $CenterContainer/Label
+@onready var health: HealthComponent = $HealthComponent
 
-var speed: float = 30.0
+var speed: float = 40.0
 
 func _init() -> void:
 	super("npc")
