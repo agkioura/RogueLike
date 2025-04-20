@@ -4,6 +4,8 @@ class_name Player extends PhysicsEnity
 
 @onready var animation = $AnimationPlayer
 @onready var weapon = $Weapon
+@onready var health = $HealthComponent
+@onready var label = $CenterContainer/Label
 @onready var moveStateMachine = $MovementStateMachine
 @onready var attackStateMachine = $AttackStateMachine
 
@@ -42,3 +44,6 @@ func _physics_process(delta: float) -> void:
 func _process(delta: float) -> void:
 	moveStateMachine.processFrame(delta)
 	attackStateMachine.processFrame(delta)
+	var maxHealth = health.maxHealth
+	var currentHealth = health.health
+	label.text = str(currentHealth) + "/" + str(maxHealth)

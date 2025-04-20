@@ -1,8 +1,10 @@
-[gd_scene load_steps=28 format=3 uid="uid://dopx06yy437aa"]
+[gd_scene load_steps=31 format=3 uid="uid://dopx06yy437aa"]
 
 [ext_resource type="Script" path="res://entities/PhysicsEntities/player/player.gd" id="1_xxrmx"]
 [ext_resource type="PackedScene" uid="uid://cg82e1r8ck2jg" path="res://entities/PhysicsEntities/weapon/weapon.tscn" id="2_ex24v"]
+[ext_resource type="Script" path="res://utilities/Components/Health Component/healthComponent.gd" id="2_hpuvo"]
 [ext_resource type="Texture2D" uid="uid://dtyfvvsa3vyh6" path="res://assets/Test Sprites/knight.png" id="2_ie4dr"]
+[ext_resource type="Script" path="res://utilities/Components/Hitbox Component/hitbox_component.gd" id="3_ly82k"]
 [ext_resource type="PackedScene" uid="uid://cert0vcaupr07" path="res://utilities/state machine/state_machine.tscn" id="3_ywb0m"]
 [ext_resource type="PackedScene" uid="uid://divlo1p11l0dq" path="res://entities/PhysicsEntities/player/States/idle/idle.tscn" id="4_8ui45"]
 [ext_resource type="PackedScene" uid="uid://cmj02vkwe0vdd" path="res://entities/PhysicsEntities/player/States/walk/walk.tscn" id="5_kwbrq"]
@@ -11,6 +13,9 @@
 [ext_resource type="Script" path="res://entities/PhysicsEntities/player/States/attack/attack.gd" id="8_sdc6f"]
 [ext_resource type="PackedScene" uid="uid://cm6xw7jnqxf4g" path="res://utilities/Components/Attack Component/attack_component.tscn" id="10_nqw0w"]
 [ext_resource type="Texture2D" uid="uid://raupcnb1jv5p" path="res://assets/Test Sprites/weapons.png" id="11_711vx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_art4a"]
+size = Vector2(8, 16)
 
 [sub_resource type="Animation" id="Animation_ttp1g"]
 length = 0.001
@@ -241,9 +246,17 @@ radius = 4.0
 script = ExtResource("1_xxrmx")
 weaponType = "sword"
 
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(4, 4)
-position_smoothing_enabled = true
+[node name="HealthComponent" type="Node2D" parent="."]
+script = ExtResource("2_hpuvo")
+maxHealth = 100.0
+health = 100.0
+
+[node name="HitboxComponent" type="Area2D" parent="." node_paths=PackedStringArray("healthComponent")]
+script = ExtResource("3_ly82k")
+healthComponent = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("RectangleShape2D_art4a")
 
 [node name="MovementStateMachine" parent="." node_paths=PackedStringArray("startingState") instance=ExtResource("3_ywb0m")]
 startingState = NodePath("idle")
@@ -293,3 +306,16 @@ libraries = {
 [node name="wallCollision" type="CollisionShape2D" parent="."]
 position = Vector2(0, 4)
 shape = SubResource("CircleShape2D_phosm")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+offset_left = -31.0
+offset_top = -33.0
+offset_right = 31.0
+offset_bottom = -10.0
+
+[node name="Label" type="Label" parent="CenterContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "100/100"
+horizontal_alignment = 3
+vertical_alignment = 3
