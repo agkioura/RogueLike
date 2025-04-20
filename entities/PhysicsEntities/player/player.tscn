@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://entities/PhysicsEntities/player/player.gd" id="1_xxrmx"]
 [ext_resource type="PackedScene" uid="uid://cg82e1r8ck2jg" path="res://entities/PhysicsEntities/weapon/weapon.tscn" id="2_ex24v"]
 [ext_resource type="Script" path="res://utilities/Components/Health Component/healthComponent.gd" id="2_hpuvo"]
+[ext_resource type="Texture2D" uid="uid://dtyfvvsa3vyh6" path="res://assets/Test Sprites/knight.png" id="2_ie4dr"]
 [ext_resource type="Script" path="res://utilities/Components/Hitbox Component/hitbox_component.gd" id="3_ly82k"]
 [ext_resource type="PackedScene" uid="uid://cert0vcaupr07" path="res://utilities/state machine/state_machine.tscn" id="3_ywb0m"]
 [ext_resource type="PackedScene" uid="uid://divlo1p11l0dq" path="res://entities/PhysicsEntities/player/States/idle/idle.tscn" id="4_8ui45"]
@@ -11,8 +12,10 @@
 [ext_resource type="PackedScene" uid="uid://cbje0cw0y0gy6" path="res://entities/PhysicsEntities/player/States/attack/not_attacking.tscn" id="8_itlni"]
 [ext_resource type="Script" path="res://entities/PhysicsEntities/player/States/attack/attack.gd" id="8_sdc6f"]
 [ext_resource type="PackedScene" uid="uid://cm6xw7jnqxf4g" path="res://utilities/Components/Attack Component/attack_component.tscn" id="10_nqw0w"]
-[ext_resource type="Texture2D" uid="uid://c1axm4s3rl1q5" path="res://assets/Test Sprites/walk (1).png" id="11_2ie06"]
-[ext_resource type="Texture2D" uid="uid://sk34pvccl5ui" path="res://assets/Test Sprites/sword (1).png" id="12_ootc5"]
+[ext_resource type="Texture2D" uid="uid://raupcnb1jv5p" path="res://assets/Test Sprites/weapons.png" id="11_711vx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_art4a"]
+size = Vector2(8, 16)
 
 [sub_resource type="Animation" id="Animation_ttp1g"]
 length = 0.001
@@ -203,7 +206,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_rngjk"]
 resource_name = "walk"
-length = 0.933337
+length = 0.533337
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -212,10 +215,10 @@ tracks/0/path = NodePath("PlayerSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2, 0.266667, 0.333333, 0.4, 0.466667, 0.533333, 0.6, 0.666667, 0.733333, 0.8, 0.866667),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.266667),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+"values": [2, 1]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qjfnm"]
@@ -237,9 +240,7 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_phosm"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_art4a"]
-size = Vector2(19, 30)
+radius = 4.0
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_xxrmx")
@@ -249,6 +250,13 @@ weaponType = "sword"
 script = ExtResource("2_hpuvo")
 maxHealth = 100.0
 health = 100.0
+
+[node name="HitboxComponent" type="Area2D" parent="." node_paths=PackedStringArray("healthComponent")]
+script = ExtResource("3_ly82k")
+healthComponent = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("RectangleShape2D_art4a")
 
 [node name="MovementStateMachine" parent="." node_paths=PackedStringArray("startingState") instance=ExtResource("3_ywb0m")]
 startingState = NodePath("idle")
@@ -277,17 +285,18 @@ attack = NodePath("../attack")
 attack = NodePath("AttackComponent")
 
 [node name="AttackComponent" parent="Weapon" instance=ExtResource("10_nqw0w")]
+dmg = 12.0
 
 [node name="PlayerSprite" type="Sprite2D" parent="."]
 y_sort_enabled = true
-texture = ExtResource("11_2ie06")
-hframes = 14
+texture = ExtResource("2_ie4dr")
+vframes = 3
 
 [node name="weaponSprite" type="Sprite2D" parent="PlayerSprite"]
-position = Vector2(-4, -2)
-rotation = -1.0472
-scale = Vector2(0.982872, 1.02847)
-texture = ExtResource("12_ootc5")
+position = Vector2(7, -3)
+rotation = -1.3439
+texture = ExtResource("11_711vx")
+vframes = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -295,17 +304,8 @@ libraries = {
 }
 
 [node name="wallCollision" type="CollisionShape2D" parent="."]
-position = Vector2(0, 6)
+position = Vector2(0, 4)
 shape = SubResource("CircleShape2D_phosm")
-
-[node name="HitboxComponent" type="Area2D" parent="." node_paths=PackedStringArray("healthComponent")]
-visible = false
-script = ExtResource("3_ly82k")
-healthComponent = NodePath("../HealthComponent")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
-position = Vector2(-0.5, 1)
-shape = SubResource("RectangleShape2D_art4a")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 offset_left = -31.0

@@ -12,7 +12,7 @@ func getRandomPoint() -> Vector2:
 	
 func enterState() -> void:
 	super()
-	parent.animation.play(animationName)
+	
 	nav.target_position = getRandomPoint()
 	print("Enemy entered patrol state")
 
@@ -22,13 +22,6 @@ func processPhysics(delta : float) -> State:
 
 	var dir = to_local(nav.get_next_path_position()).normalized()
 	parent.velocity = dir * parent.speed
-	
-	if parent.velocity.x > 0:
-		if $"../../Sprite2D".scale.x == -1:
-			$"../../Sprite2D".scale.x *= -1
-	else:
-		if $"../../Sprite2D".scale.x == 1:
-			$"../../Sprite2D".scale.x *= -1
 	parent.move_and_slide()
 	return null
 
@@ -38,9 +31,7 @@ func _on_target_area_body_entered(body: Node2D) -> void:
 
 func _on_navigation_agent_2d_navigation_finished() -> void:
 	waitTimer.wait_time = randf_range(2, 3)
-	parent.animation.stop()
 	waitTimer.start()
 
 func _on_patrol_wait_timer_timeout() -> void:
-	parent.animation.play(animationName)
 	nav.target_position = getRandomPoint()
