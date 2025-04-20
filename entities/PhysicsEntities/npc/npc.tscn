@@ -1,12 +1,18 @@
-[gd_scene load_steps=7 format=3 uid="uid://eantyxvqtsvp"]
+[gd_scene load_steps=11 format=3 uid="uid://eantyxvqtsvp"]
 
 [ext_resource type="Script" path="res://entities/PhysicsEntities/npc/npc.gd" id="1_ihfay"]
 [ext_resource type="PackedScene" uid="uid://fnaly4wbnhwf" path="res://utilities/Components/Health Component/health_component.tscn" id="2_2s7nr"]
 [ext_resource type="Texture2D" uid="uid://dvw10gw0od5ar" path="res://assets/Characters/Humanoid0.png" id="2_vunmd"]
 [ext_resource type="PackedScene" uid="uid://d2m1cfvio00nm" path="res://utilities/Components/Hitbox Component/hitbox_component.tscn" id="4_aaa53"]
+[ext_resource type="Script" path="res://utilities/state machine/state_machine.gd" id="5_psqq5"]
+[ext_resource type="Script" path="res://entities/PhysicsEntities/npc/States/patrol/patrol.gd" id="6_ryhjq"]
+[ext_resource type="Script" path="res://entities/PhysicsEntities/npc/States/chase/chase.gd" id="7_eqguu"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_i25br"]
-size = Vector2(7, 10)
+[sub_resource type="CircleShape2D" id="CircleShape2D_ws41j"]
+radius = 5.59017
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_86qnn"]
+radius = 63.1269
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i3h1v"]
 size = Vector2(12, 15)
@@ -25,9 +31,13 @@ vframes = 27
 frame = 23
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(-0.5, 2)
-shape = SubResource("RectangleShape2D_i25br")
+shape = SubResource("CircleShape2D_ws41j")
+
+[node name="TargetArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TargetArea"]
+shape = SubResource("CircleShape2D_86qnn")
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("4_aaa53")]
 visible = false
@@ -49,3 +59,23 @@ theme_override_font_sizes/font_size = 10
 text = "100/100"
 horizontal_alignment = 3
 vertical_alignment = 3
+
+[node name="StateMachine" type="Node2D" parent="." node_paths=PackedStringArray("startingState")]
+script = ExtResource("5_psqq5")
+startingState = NodePath("Patrol")
+
+[node name="Patrol" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("chase")]
+script = ExtResource("6_ryhjq")
+chase = NodePath("../Chase")
+
+[node name="Chase" type="Node2D" parent="StateMachine" node_paths=PackedStringArray("patrol")]
+script = ExtResource("7_eqguu")
+patrol = NodePath("../Patrol")
+
+[node name="PatrolTimer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[connection signal="body_entered" from="TargetArea" to="StateMachine/Patrol" method="_on_target_area_body_entered"]
+[connection signal="body_exited" from="TargetArea" to="StateMachine/Chase" method="_on_target_area_body_exited"]
+[connection signal="timeout" from="PatrolTimer" to="StateMachine/Patrol" method="_on_patrol_timer_timeout"]
