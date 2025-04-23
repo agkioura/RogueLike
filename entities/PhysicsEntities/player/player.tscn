@@ -277,7 +277,6 @@ attack = NodePath("../attack")
 attack = NodePath("AttackComponent")
 
 [node name="AttackComponent" parent="Weapon" instance=ExtResource("10_nqw0w")]
-dmg = 12.0
 
 [node name="PlayerSprite" type="Sprite2D" parent="."]
 y_sort_enabled = true
