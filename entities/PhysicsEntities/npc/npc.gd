@@ -11,6 +11,7 @@ enum WEAPONS {
 @onready var attackStateMachine: StateMachine = $AttackStateMachine
 @onready var label: Label = $CenterContainer/Label
 @onready var health: HealthComponent = $HealthComponent
+@onready var animation: AnimationPlayer = $AnimationPlayer
 var target: PhysicsEnity
 
 var speed: float = 40.0

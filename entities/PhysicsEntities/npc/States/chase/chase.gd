@@ -8,6 +8,7 @@ func enterState() -> void:
 	super()
 	print("Enemy entered chase state")
 	if parent.target:
+		parent.animation.play(animationName)
 		nav.target_position = parent.target.global_position
 
 	
@@ -17,6 +18,13 @@ func processPhysics(delta : float) -> State:
 		
 	var dir = to_local(nav.get_next_path_position()).normalized()
 	parent.velocity = dir * parent.speed
+	
+	if parent.velocity.x > 0:
+		if $"../../Sprite2D".scale.x == -1:
+			$"../../Sprite2D".scale.x *= -1
+	else:
+		if $"../../Sprite2D".scale.x == 1:
+			$"../../Sprite2D".scale.x *= -1
 	parent.move_and_slide()
 	return null
 
