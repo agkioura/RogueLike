@@ -18,16 +18,21 @@ func enterState() -> void:
 func processPhysics(delta : float) -> State:
 	if parent.target:
 		return chase
-
-	var dir = to_local(nav.get_next_path_position()).normalized()
-	parent.velocity = dir * parent.speed
-	
-	if parent.velocity.x > 0:
-		if parent.sprite.scale.x == -1:
-			parent.sprite.scale.x *= -1
+		
+	var next_point = nav.get_next_path_position()
+	var local_target = to_local(next_point)
+	if local_target.length() > 2.0:
+		var dir = local_target.normalized()
+		parent.velocity = dir * parent.speed
+		if parent.velocity.x > 0:
+			if parent.sprite.scale.x == -1:
+				parent.sprite.scale.x *= -1
+		else:
+			if parent.sprite.scale.x == 1:
+				parent.sprite.scale.x *= -1
 	else:
-		if parent.sprite.scale.x == 1:
-			parent.sprite.scale.x *= -1
+		parent.velocity = Vector2.ZERO
+	
 	parent.move_and_slide()
 	return null
 
