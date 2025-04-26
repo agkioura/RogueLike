@@ -3,7 +3,6 @@ class_name Idle extends State
 @export var walk : State
 
 func enterState() -> void:
-	super()
 	parent.sprite.frame = 0;
 	parent.velocity = Vector2.ZERO
 	

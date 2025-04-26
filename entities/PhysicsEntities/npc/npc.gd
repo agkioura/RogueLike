@@ -13,6 +13,7 @@ enum WEAPONS {
 @onready var animation: AnimationPlayer = $AnimationPlayer
 @onready var sprite: Sprite2D = $EnemySprite
 @onready var weaponSprite: Sprite2D = $EnemySprite/weaponSprite
+@onready var attackRange: Area2D = $AttackRange
 var target: PhysicsEnity
 
 var speed: float = 40.0

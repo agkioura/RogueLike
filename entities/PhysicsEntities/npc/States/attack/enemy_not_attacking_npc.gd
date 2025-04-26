@@ -1,14 +1,19 @@
-class_name NotAttackingNpc extends State
+class_name EnemyNotAttacking extends State
 
 @export var attack: State
+@export var attackCooldown: Timer 
 var shouldAttack = false
 var canAttack = true
 
+func initialize() -> void:
+	parent.attackRange.connect("body_entered", _on_attack_range_body_entered)
+	parent.attackRange.connect("body_exited", _on_attack_range_body_exited)
+	attackCooldown.timeout.connect(_on_attack_cooldown_timeout)
+
 func enterState() -> void:
-	super()
 	if !canAttack:
 		print("On cooldown")
-		$"../../../AttackCoolDown".start()
+		attackCooldown.start()
 	print("Enemy entered not attacking state")
 	
 func processFrame(delta: float) -> State:
@@ -27,7 +32,7 @@ func _on_attack_range_body_exited(body: Node2D) -> void:
 		shouldAttack = false
 
 
-func _on_attack_cool_down_timeout() -> void:
+func _on_attack_cooldown_timeout() -> void:
 	if !canAttack:
 		print("done")
 		canAttack = true

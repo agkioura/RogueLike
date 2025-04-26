@@ -1,9 +1,6 @@
 class_name NotAttacking extends State
 
 @export var attack: State
-
-func enterState() -> void:
-	super()
 	
 func processInput(event: InputEvent) -> State:
 	if Input.is_action_just_pressed("attack"):

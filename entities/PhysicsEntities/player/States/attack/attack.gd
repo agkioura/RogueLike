@@ -7,7 +7,6 @@ var variation: int = 0
 var finished = false
 
 func enterState() -> void:
-	super()
 	parent.weaponSprite.visible = false
 	animationName = "attack"
 	weapon.use(get_global_mouse_position())
