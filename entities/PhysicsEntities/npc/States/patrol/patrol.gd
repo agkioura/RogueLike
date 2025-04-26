@@ -4,8 +4,8 @@ class_name Patrol extends State
 
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
-@onready var nav: NavigationAgent2D = $"../../NavigationAgent2D"
-@onready var waitTimer: Timer = $"../../PatrolWaitTimer"
+@onready var nav: NavigationAgent2D = $"../../../NavigationAgent2D"
+@onready var waitTimer: Timer = $"../../../PatrolWaitTimer"
 
 func getRandomPoint() -> Vector2:
 	return Vector2(rng.randf_range(parent.global_position.x - 50, parent.global_position.x + 50), rng.randf_range(parent.global_position.y - 50, parent.global_position.y + 50))
@@ -24,11 +24,11 @@ func processPhysics(delta : float) -> State:
 	parent.velocity = dir * parent.speed
 	
 	if parent.velocity.x > 0:
-		if $"../../Sprite2D".scale.x == -1:
-			$"../../Sprite2D".scale.x *= -1
+		if parent.sprite.scale.x == -1:
+			parent.sprite.scale.x *= -1
 	else:
-		if $"../../Sprite2D".scale.x == 1:
-			$"../../Sprite2D".scale.x *= -1
+		if parent.sprite.scale.x == 1:
+			parent.sprite.scale.x *= -1
 	parent.move_and_slide()
 	return null
 

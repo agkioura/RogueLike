@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://eantyxvqtsvp"]
+[gd_scene load_steps=21 format=3 uid="uid://eantyxvqtsvp"]
 
 [ext_resource type="Script" path="res://entities/PhysicsEntities/npc/npc.gd" id="1_ihfay"]
 [ext_resource type="PackedScene" uid="uid://fnaly4wbnhwf" path="res://utilities/Components/Health Component/health_component.tscn" id="2_2s7nr"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://d2m1cfvio00nm" path="res://utilities/Components/Hitbox Component/hitbox_component.tscn" id="4_aaa53"]
 [ext_resource type="Script" path="res://utilities/state machine/state_machine.gd" id="5_psqq5"]
 [ext_resource type="Script" path="res://entities/PhysicsEntities/npc/States/patrol/patrol.gd" id="6_ryhjq"]
+[ext_resource type="PackedScene" uid="uid://dropd42ko2su7" path="res://utilities/state machine/state_manager.tscn" id="6_y0mdo"]
 [ext_resource type="Script" path="res://entities/PhysicsEntities/npc/States/chase/chase.gd" id="7_eqguu"]
 [ext_resource type="Script" path="res://entities/PhysicsEntities/npc/States/attack/attack_npc.gd" id="8_b1byc"]
 [ext_resource type="Script" path="res://entities/PhysicsEntities/npc/States/attack/not_attacking_npc.gd" id="9_yaugf"]
@@ -30,7 +31,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("EnemySprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -47,7 +48,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("EnemySprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -71,11 +72,11 @@ weaponType = "sword"
 maxHealth = 100.0
 health = 78.0
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="EnemySprite" type="Sprite2D" parent="."]
 texture = ExtResource("3_37h61")
 hframes = 14
 
-[node name="weaponSprite" type="Sprite2D" parent="Sprite2D"]
+[node name="weaponSprite" type="Sprite2D" parent="EnemySprite"]
 position = Vector2(12, -7)
 texture = ExtResource("4_1l8jv")
 
@@ -103,6 +104,35 @@ healthComponent = NodePath("../HealthComponent")
 position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_i3h1v")
 
+[node name="StateManager" parent="." instance=ExtResource("6_y0mdo")]
+
+[node name="MovementStateMachine" type="Node2D" parent="StateManager" node_paths=PackedStringArray("startingState")]
+script = ExtResource("5_psqq5")
+startingState = NodePath("Patrol")
+
+[node name="Patrol" type="Node2D" parent="StateManager/MovementStateMachine" node_paths=PackedStringArray("chase")]
+script = ExtResource("6_ryhjq")
+chase = NodePath("../Chase")
+animationName = "walk"
+
+[node name="Chase" type="Node2D" parent="StateManager/MovementStateMachine" node_paths=PackedStringArray("patrol")]
+script = ExtResource("7_eqguu")
+patrol = NodePath("../Patrol")
+animationName = "walk"
+
+[node name="AttackStateMachine" type="Node2D" parent="StateManager" node_paths=PackedStringArray("startingState")]
+script = ExtResource("5_psqq5")
+startingState = NodePath("NotAttackingNpc")
+
+[node name="AttackNpc" type="Node2D" parent="StateManager/AttackStateMachine" node_paths=PackedStringArray("notAttacking", "weapon")]
+script = ExtResource("8_b1byc")
+notAttacking = NodePath("../NotAttackingNpc")
+weapon = NodePath("../../../Weapon")
+
+[node name="NotAttackingNpc" type="Node2D" parent="StateManager/AttackStateMachine" node_paths=PackedStringArray("attack")]
+script = ExtResource("9_yaugf")
+attack = NodePath("../AttackNpc")
+
 [node name="CenterContainer" type="CenterContainer" parent="."]
 offset_left = -31.0
 offset_top = -33.0
@@ -115,33 +145,6 @@ theme_override_font_sizes/font_size = 10
 text = "100/100"
 horizontal_alignment = 3
 vertical_alignment = 3
-
-[node name="MovementStateMachine" type="Node2D" parent="." node_paths=PackedStringArray("startingState")]
-script = ExtResource("5_psqq5")
-startingState = NodePath("Patrol")
-
-[node name="Patrol" type="Node2D" parent="MovementStateMachine" node_paths=PackedStringArray("chase")]
-script = ExtResource("6_ryhjq")
-chase = NodePath("../Chase")
-animationName = "walk"
-
-[node name="Chase" type="Node2D" parent="MovementStateMachine" node_paths=PackedStringArray("patrol")]
-script = ExtResource("7_eqguu")
-patrol = NodePath("../Patrol")
-animationName = "walk"
-
-[node name="AttackStateMachine" type="Node2D" parent="." node_paths=PackedStringArray("startingState")]
-script = ExtResource("5_psqq5")
-startingState = NodePath("NotAttackingNpc")
-
-[node name="AttackNpc" type="Node2D" parent="AttackStateMachine" node_paths=PackedStringArray("notAttacking", "weapon")]
-script = ExtResource("8_b1byc")
-notAttacking = NodePath("../NotAttackingNpc")
-weapon = NodePath("../../Weapon")
-
-[node name="NotAttackingNpc" type="Node2D" parent="AttackStateMachine" node_paths=PackedStringArray("attack")]
-script = ExtResource("9_yaugf")
-attack = NodePath("../AttackNpc")
 
 [node name="Weapon" parent="." node_paths=PackedStringArray("attack") instance=ExtResource("10_881g2")]
 attack = NodePath("AttackComponent")
@@ -170,11 +173,11 @@ libraries = {
 "": SubResource("AnimationLibrary_jt4tj")
 }
 
-[connection signal="body_entered" from="AttackRange" to="AttackStateMachine/NotAttackingNpc" method="_on_attack_range_body_entered"]
-[connection signal="body_exited" from="AttackRange" to="AttackStateMachine/NotAttackingNpc" method="_on_attack_range_body_exited"]
-[connection signal="body_entered" from="TargetArea" to="MovementStateMachine/Patrol" method="_on_target_area_body_entered"]
-[connection signal="body_exited" from="TargetArea" to="MovementStateMachine/Chase" method="_on_target_area_body_exited"]
-[connection signal="timeout" from="AttackCoolDown" to="AttackStateMachine/NotAttackingNpc" method="_on_attack_cool_down_timeout"]
-[connection signal="timeout" from="PatrolWaitTimer" to="MovementStateMachine/Patrol" method="_on_patrol_wait_timer_timeout"]
-[connection signal="timeout" from="PathTimer" to="MovementStateMachine/Chase" method="_on_path_timer_timeout"]
-[connection signal="navigation_finished" from="NavigationAgent2D" to="MovementStateMachine/Patrol" method="_on_navigation_agent_2d_navigation_finished"]
+[connection signal="body_entered" from="AttackRange" to="StateManager/AttackStateMachine/NotAttackingNpc" method="_on_attack_range_body_entered"]
+[connection signal="body_exited" from="AttackRange" to="StateManager/AttackStateMachine/NotAttackingNpc" method="_on_attack_range_body_exited"]
+[connection signal="body_entered" from="TargetArea" to="StateManager/MovementStateMachine/Patrol" method="_on_target_area_body_entered"]
+[connection signal="body_exited" from="TargetArea" to="StateManager/MovementStateMachine/Chase" method="_on_target_area_body_exited"]
+[connection signal="timeout" from="AttackCoolDown" to="StateManager/AttackStateMachine/NotAttackingNpc" method="_on_attack_cool_down_timeout"]
+[connection signal="timeout" from="PatrolWaitTimer" to="StateManager/MovementStateMachine/Patrol" method="_on_patrol_wait_timer_timeout"]
+[connection signal="timeout" from="PathTimer" to="StateManager/MovementStateMachine/Chase" method="_on_path_timer_timeout"]
+[connection signal="navigation_finished" from="NavigationAgent2D" to="StateManager/MovementStateMachine/Patrol" method="_on_navigation_agent_2d_navigation_finished"]

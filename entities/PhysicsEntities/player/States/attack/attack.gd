@@ -8,7 +8,7 @@ var finished = false
 
 func enterState() -> void:
 	super()
-	$"../../PlayerSprite/weaponSprite".visible = false
+	parent.weaponSprite.visible = false
 	animationName = "attack"
 	weapon.use(get_global_mouse_position())
 	if (variation == 0):
@@ -19,7 +19,7 @@ func enterState() -> void:
 		variation = 0
 	
 func exitState() -> void:
-	$"../../PlayerSprite/weaponSprite".visible = true
+	parent.weaponSprite.visible = true
 	
 func processFrame(delta: float) -> State:
 	if weapon.animation.is_playing():
