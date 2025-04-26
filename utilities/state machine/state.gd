@@ -5,6 +5,9 @@ extends Node2D
 @export var animationName : String 
 var parent: PhysicsEnity
 
+func initialize() -> void:
+	pass
+
 func enterState() -> void:
 	pass
 

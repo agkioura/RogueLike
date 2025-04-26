@@ -7,7 +7,6 @@ class_name Chase extends State
 var approachRadius: int = 30
 
 func enterState() -> void:
-	super()
 	print("Enemy entered chase state")
 	if parent.target:
 		parent.animation.play(animationName)

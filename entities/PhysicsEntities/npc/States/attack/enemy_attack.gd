@@ -1,4 +1,4 @@
-class_name AttackNpc extends State
+class_name EnemyAttack extends State
 
 @export var notAttacking: State
 @export var weapon: Weapon
@@ -7,7 +7,6 @@ var variation: int = 0
 var finished = false
 
 func enterState() -> void:
-	super()
 	parent.weaponSprite.visible = false
 	animationName = "attack"
 	if parent.target:

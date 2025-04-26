@@ -8,6 +8,7 @@ var currentState : State
 func initialize(parent: PhysicsEnity):
 	for child in get_children():
 		child.parent = parent
+		child.initialize()
 	changeState(startingState)
 
 func changeState(newState : State) -> void:

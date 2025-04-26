@@ -11,7 +11,6 @@ func getRandomPoint() -> Vector2:
 	return Vector2(rng.randf_range(parent.global_position.x - 50, parent.global_position.x + 50), rng.randf_range(parent.global_position.y - 50, parent.global_position.y + 50))
 	
 func enterState() -> void:
-	super()
 	parent.animation.play(animationName)
 	nav.target_position = getRandomPoint()
 	print("Enemy entered patrol state")

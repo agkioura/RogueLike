@@ -5,7 +5,6 @@ class_name Walk extends State
 @export var moveSpeed : int = 50
 
 func enterState() -> void:
-	super()
 	parent.animation.play(animationName)
 	
 func exitState() -> void:
