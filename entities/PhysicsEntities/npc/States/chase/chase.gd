@@ -24,8 +24,8 @@ func processPhysics(delta : float) -> State:
 	else:
 		parent.velocity = Vector2.ZERO
 		
-	
-	if parent.velocity.x > 0:
+	var directionToTarget := Vector2(parent.target.global_position.x - parent.global_position.x, parent.target.global_position.y - parent.global_position.y)
+	if directionToTarget.x > 0:
 		if $"../../Sprite2D".scale.x == -1:
 			$"../../Sprite2D".scale.x *= -1
 	else:
