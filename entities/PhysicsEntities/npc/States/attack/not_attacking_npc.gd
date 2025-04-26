@@ -8,7 +8,7 @@ func enterState() -> void:
 	super()
 	if !canAttack:
 		print("On cooldown")
-		$"../../AttackCoolDown".start()
+		$"../../../AttackCoolDown".start()
 	print("Enemy entered not attacking state")
 	
 func processFrame(delta: float) -> State:

@@ -25,10 +25,10 @@ func processPhysics(delta: float) -> State:
 	
 	var mouse_position = get_global_mouse_position()
 	if mouse_position.x - global_position.x < 0:
-		if ($"../../PlayerSprite".scale.x == 1):
-			$"../../PlayerSprite".scale.x *= -1
+		if (parent.sprite.scale.x == 1):
+			parent.sprite.scale.x *= -1
 	else:
-		if ($"../../PlayerSprite".scale.x == -1):
-			$"../../PlayerSprite".scale.x *= -1
+		if (parent.sprite.scale.x == -1):
+			parent.sprite.scale.x *= -1
 	parent.move_and_slide()
 	return null

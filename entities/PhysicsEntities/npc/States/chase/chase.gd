@@ -2,7 +2,7 @@ class_name Chase extends State
 
 @export var patrol: State
 
-@onready var nav: NavigationAgent2D = $"../../NavigationAgent2D"
+@onready var nav: NavigationAgent2D = $"../../../NavigationAgent2D"
 
 var approachRadius: int = 30
 
@@ -26,11 +26,11 @@ func processPhysics(delta : float) -> State:
 		
 	var directionToTarget := Vector2(parent.target.global_position.x - parent.global_position.x, parent.target.global_position.y - parent.global_position.y)
 	if directionToTarget.x > 0:
-		if $"../../Sprite2D".scale.x == -1:
-			$"../../Sprite2D".scale.x *= -1
+		if parent.sprite.scale.x == -1:
+			parent.sprite.scale.x *= -1
 	else:
-		if $"../../Sprite2D".scale.x == 1:
-			$"../../Sprite2D".scale.x *= -1
+		if parent.sprite.scale.x == 1:
+			parent.sprite.scale.x *= -1
 	parent.move_and_slide()
 	return null
 

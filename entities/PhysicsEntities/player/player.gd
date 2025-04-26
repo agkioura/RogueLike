@@ -2,12 +2,13 @@ class_name Player extends PhysicsEnity
 
 @export var weaponType: String
 
-@onready var animation = $AnimationPlayer
-@onready var weapon = $Weapon
-@onready var health = $HealthComponent
-@onready var label = $CenterContainer/Label
-@onready var moveStateMachine = $MovementStateMachine
-@onready var attackStateMachine = $AttackStateMachine
+@onready var sprite: Sprite2D = $PlayerSprite
+@onready var weaponSprite: Sprite2D = $PlayerSprite/weaponSprite
+@onready var animation: AnimationPlayer = $AnimationPlayer
+@onready var weapon: Weapon = $Weapon
+@onready var health: HealthComponent = $HealthComponent
+@onready var label: Label = $CenterContainer/Label
+@onready var stateManager: StateManager = $StateManager
 
 var facingDirection : Vector2
 
@@ -29,21 +30,17 @@ func _ready() -> void:
 		_:
 			type = 0
 	weapon.type = type
-	$PlayerSprite/weaponSprite.frame = type
-	moveStateMachine.initialize(self)
-	attackStateMachine.initialize(self)
+	weaponSprite.frame = type
+	stateManager.initialize(self)
 
 func _unhandled_input(event: InputEvent) -> void:
-	moveStateMachine.processInput(event)
-	attackStateMachine.processInput(event)
+	stateManager.processInput(event)
 	
 func _physics_process(delta: float) -> void:
-	moveStateMachine.processPhysics(delta)
-	attackStateMachine.processPhysics(delta)
+	stateManager.processPhysics(delta)
 	
 func _process(delta: float) -> void:
-	moveStateMachine.processFrame(delta)
-	attackStateMachine.processFrame(delta)
+	stateManager.processFrame(delta)
 	var maxHealth = health.maxHealth
 	var currentHealth = health.health
 	label.text = str(currentHealth) + "/" + str(maxHealth)

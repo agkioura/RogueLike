@@ -7,10 +7,12 @@ enum WEAPONS {
 	STAFF
 }
 
-@onready var stateMachine: StateMachine = $MovementStateMachine
-@onready var attackStateMachine: StateMachine = $AttackStateMachine
+@onready var stateManager: StateManager = $StateManager
 @onready var label: Label = $CenterContainer/Label
 @onready var health: HealthComponent = $HealthComponent
+@onready var animation: AnimationPlayer = $AnimationPlayer
+@onready var sprite: Sprite2D = $EnemySprite
+@onready var weaponSprite: Sprite2D = $EnemySprite/weaponSprite
 var target: PhysicsEnity
 
 var speed: float = 40.0
@@ -28,21 +30,17 @@ func _ready() -> void:
 		_:
 			type = 0
 	weapon.type = type
-	stateMachine.initialize(self)
-	attackStateMachine.initialize(self)
+	stateManager.initialize(self)
 	
 
 func _unhandled_input(event: InputEvent) -> void:
-	stateMachine.processInput(event)
-	attackStateMachine.processInput(event)
+	stateManager.processInput(event)
 	
 func _physics_process(delta: float) -> void:
-	stateMachine.processPhysics(delta)
-	attackStateMachine.processPhysics(delta)
+	stateManager.processPhysics(delta)
 	
 func _process(delta: float) -> void:
-	stateMachine.processFrame(delta)
-	attackStateMachine.processFrame(delta)
+	stateManager.processFrame(delta)
 	var maxHealth = health.maxHealth
 	var currentHealth = health.health
 	label.text = str(currentHealth) + "/" + str(maxHealth)
