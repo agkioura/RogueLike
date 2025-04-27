@@ -8,7 +8,7 @@ enum WEAPONS {
 }
 
 @onready var stateManager: StateManager = $StateManager
-@onready var label: Label = $CenterContainer/Label
+@onready var healthBar: ProgressBar = $healthBar
 @onready var health: HealthComponent = $HealthComponent
 @onready var animation: AnimationPlayer = $AnimationPlayer
 @onready var sprite: Sprite2D = $EnemySprite
@@ -44,4 +44,4 @@ func _process(delta: float) -> void:
 	stateManager.processFrame(delta)
 	var maxHealth = health.maxHealth
 	var currentHealth = health.health
-	label.text = str(currentHealth) + "/" + str(maxHealth)
+	healthBar.value = currentHealth * 100 / maxHealth

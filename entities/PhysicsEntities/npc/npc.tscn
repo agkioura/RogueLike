@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://eantyxvqtsvp"]
+[gd_scene load_steps=23 format=3 uid="uid://eantyxvqtsvp"]
 
 [ext_resource type="Script" path="res://entities/PhysicsEntities/npc/npc.gd" id="1_ihfay"]
 [ext_resource type="PackedScene" uid="uid://fnaly4wbnhwf" path="res://utilities/Components/Health Component/health_component.tscn" id="2_2s7nr"]
@@ -64,13 +64,19 @@ _data = {
 "walk": SubResource("Animation_jtcpo")
 }
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0boj6"]
+bg_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6lnh8"]
+bg_color = Color(0, 1, 0, 1)
+
 [node name="Npc" type="CharacterBody2D"]
 script = ExtResource("1_ihfay")
 weaponType = "sword"
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_2s7nr")]
 maxHealth = 100.0
-health = 78.0
+health = 100.0
 
 [node name="EnemySprite" type="Sprite2D" parent="."]
 texture = ExtResource("3_37h61")
@@ -134,19 +140,6 @@ script = ExtResource("9_yaugf")
 attack = NodePath("../EnemyAttack")
 attackCooldown = NodePath("../../../AttackCooldown")
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
-offset_left = -31.0
-offset_top = -33.0
-offset_right = 31.0
-offset_bottom = -10.0
-
-[node name="Label" type="Label" parent="CenterContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 10
-text = "100/100"
-horizontal_alignment = 3
-vertical_alignment = 3
-
 [node name="Weapon" parent="." node_paths=PackedStringArray("attack") instance=ExtResource("10_881g2")]
 attack = NodePath("AttackComponent")
 
@@ -172,6 +165,16 @@ avoidance_enabled = true
 libraries = {
 "": SubResource("AnimationLibrary_jt4tj")
 }
+
+[node name="healthBar" type="ProgressBar" parent="."]
+offset_left = -15.0
+offset_top = -27.0
+offset_right = 15.0
+offset_bottom = -22.0
+theme_override_styles/background = SubResource("StyleBoxFlat_0boj6")
+theme_override_styles/fill = SubResource("StyleBoxFlat_6lnh8")
+value = 100.0
+show_percentage = false
 
 [connection signal="body_entered" from="TargetArea" to="StateManager/MovementStateMachine/Patrol" method="_on_target_area_body_entered"]
 [connection signal="body_exited" from="TargetArea" to="StateManager/MovementStateMachine/Chase" method="_on_target_area_body_exited"]
