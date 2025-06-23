@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://cg82e1r8ck2jg" path="res://entities/PhysicsEntities/weapon/weapon.tscn" id="8_msk5v"]
 [ext_resource type="PackedScene" uid="uid://cm6xw7jnqxf4g" path="res://utilities/Components/Attack Component/attack_component.tscn" id="9_s711v"]
 [ext_resource type="PackedScene" uid="uid://do6o5djrmjhhp" path="res://UI Elements/health bars/health_bar.tscn" id="10_3rbi5"]
-[ext_resource type="PackedScene" uid="uid://fnaly4wbnhwf" path="res://utilities/Components/Health Component/health_component.tscn" id="11_8614u"]
+[ext_resource type="PackedScene" uid="uid://fnaly4wbnhwf" path="res://utilities/Components/Health Components/Health Component/health_component.tscn" id="11_8614u"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_phosm"]
 radius = 8.0
@@ -46,7 +46,7 @@ attack = NodePath("../attack")
 attack = NodePath("AttackComponent")
 
 [node name="AttackComponent" parent="Weapon" instance=ExtResource("9_s711v")]
-dmg = 13.0
+dmg = 20.0
 knockbackForce = 0
 
 [node name="wallCollision" type="CollisionShape2D" parent="."]

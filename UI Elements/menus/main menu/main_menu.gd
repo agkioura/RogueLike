@@ -10,7 +10,7 @@ func _ready():
 	quit_button.pressed.connect(_on_quit_pressed)
 
 func _on_play_pressed():
-	Global.gameManager.loadLevel("res://levels/enemy_ai_test.tscn")
+	Global.gameManager.loadLevel("res://levels/test_floor.tscn")
 
 func _on_options_pressed():
 	Global.gameManager.loadGui("res://menus/options/options.tscn")

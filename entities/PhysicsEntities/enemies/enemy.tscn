@@ -1,7 +1,6 @@
 [gd_scene load_steps=15 format=3 uid="uid://eantyxvqtsvp"]
 
 [ext_resource type="Script" path="res://entities/PhysicsEntities/enemies/enemy.gd" id="1_ihfay"]
-[ext_resource type="PackedScene" uid="uid://fnaly4wbnhwf" path="res://utilities/Components/Health Component/health_component.tscn" id="2_h3212"]
 [ext_resource type="PackedScene" uid="uid://cert0vcaupr07" path="res://utilities/state machine/state_machine.tscn" id="3_j1qeb"]
 [ext_resource type="PackedScene" uid="uid://d2m1cfvio00nm" path="res://utilities/Components/Hitbox Component/hitbox_component.tscn" id="4_aaa53"]
 [ext_resource type="PackedScene" uid="uid://do6o5djrmjhhp" path="res://UI Elements/health bars/health_bar.tscn" id="4_rvj80"]
@@ -12,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://cpd4mbft0e73" path="res://utilities/state machine/States/MoveStates/chase.tscn" id="8_1e0ra"]
 [ext_resource type="PackedScene" uid="uid://cg82e1r8ck2jg" path="res://entities/PhysicsEntities/weapon/weapon.tscn" id="10_881g2"]
 [ext_resource type="PackedScene" uid="uid://cm6xw7jnqxf4g" path="res://utilities/Components/Attack Component/attack_component.tscn" id="10_vyxy5"]
+[ext_resource type="PackedScene" uid="uid://fnaly4wbnhwf" path="res://utilities/Components/Health Components/Health Component/health_component.tscn" id="12_2400l"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_av5wg"]
 
@@ -20,6 +20,7 @@ radius = 261.174
 
 [node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("stateManager")]
 script = ExtResource("1_ihfay")
+speed = 50.0
 stateManager = NodePath("StateManager")
 
 [node name="StateManager" parent="." instance=ExtResource("6_y0mdo")]
@@ -51,10 +52,6 @@ weapon = NodePath("../../../Weapon")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_av5wg")
 
-[node name="HealthComponent" parent="." instance=ExtResource("2_h3212")]
-maxHealth = 100.0
-health = 100.0
-
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("4_aaa53")]
 healthComponent = NodePath("../HealthComponent")
 
@@ -72,7 +69,7 @@ attack = NodePath("AttackComponent")
 chargeTime = 1.0
 
 [node name="AttackComponent" parent="Weapon" instance=ExtResource("10_vyxy5")]
-dmg = 10.0
+dmg = 13.0
 knockbackForce = 0
 
 [node name="ChargeTimer" type="Timer" parent="."]
@@ -86,6 +83,11 @@ avoidance_enabled = true
 debug_enabled = true
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_75oov")
+
+[node name="HealthComponent" parent="." instance=ExtResource("12_2400l")]
+maxHealth = 100.0
+health = 100.0

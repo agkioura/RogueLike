@@ -8,4 +8,5 @@ func _ready() -> void:
 		value = healthComponent.health
 
 func _process(_delta: float) -> void:
-	value = healthComponent.health
+	if healthComponent:
+		value = healthComponent.health

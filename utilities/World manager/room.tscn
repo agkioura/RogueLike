@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cemcy42spx77o"]
+
+[ext_resource type="Script" path="res://utilities/World manager/room.gd" id="1_1mmao"]
+
+[node name="Room" type="Node2D"]
+script = ExtResource("1_1mmao")

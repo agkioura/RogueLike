@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://jqant3t12efe"]
+[gd_scene load_steps=7 format=3 uid="uid://jqant3t12efe"]
 
 [ext_resource type="PackedScene" uid="uid://dopx06yy437aa" path="res://entities/PhysicsEntities/player/player.tscn" id="1_1vnm1"]
 [ext_resource type="PackedScene" uid="uid://eantyxvqtsvp" path="res://entities/PhysicsEntities/enemies/enemy.tscn" id="2_jmeft"]
+[ext_resource type="PackedScene" uid="uid://bcl1f5mraax2f" path="res://utilities/World manager/level_manager.tscn" id="3_k4e1a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6ptjn"]
 size = Vector2(1156, 24)
@@ -10,9 +11,9 @@ size = Vector2(1156, 24)
 size = Vector2(37.5, 606.5)
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_a2o1v"]
-vertices = PackedVector2Array(1094, 606, 58, 606, 58, 42, 1094, 42)
+vertices = PackedVector2Array(1051.15, 106.922, 1058.84, 599.063, 58.25, 605.922, 70.7422, 99.0703)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(48, 32, 48, 616, 1104, 616, 1104, 32)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(61, 89, 48, 616, 1069, 609, 1061, 97), PackedVector2Array(61, 97, 61, 609, 1053, 609, 1077, 609, 1061, 609, 1061, 97, 61, 89, 53, 89)])
 
 [node name="testLevel" type="Node2D"]
 
@@ -51,4 +52,7 @@ scale = Vector2(3, 3)
 speed = 40.0
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+position = Vector2(11, -33)
 navigation_polygon = SubResource("NavigationPolygon_a2o1v")
+
+[node name="LevelManager" parent="." instance=ExtResource("3_k4e1a")]

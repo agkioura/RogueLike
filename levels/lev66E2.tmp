@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://wj75ixsf0xo8"]
+
+[ext_resource type="Script" path="res://levels/level_generator_test.gd" id="1_fyy3m"]
+[ext_resource type="PackedScene" uid="uid://bcl1f5mraax2f" path="res://utilities/World manager/level_manager.tscn" id="2_jgjpq"]
+
+[node name="LevelGenerator_test" type="Node2D"]
+script = ExtResource("1_fyy3m")
+
+[node name="LevelManager" parent="." instance=ExtResource("2_jgjpq")]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
