@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://cpd4mbft0e73" path="res://utilities/state machine/States/MoveStates/chase.tscn" id="8_1e0ra"]
 [ext_resource type="PackedScene" uid="uid://cg82e1r8ck2jg" path="res://entities/PhysicsEntities/weapon/weapon.tscn" id="10_881g2"]
 [ext_resource type="PackedScene" uid="uid://cm6xw7jnqxf4g" path="res://utilities/Components/Attack Component/attack_component.tscn" id="10_vyxy5"]
-[ext_resource type="PackedScene" uid="uid://fnaly4wbnhwf" path="res://utilities/Components/Health Components/Health Component/health_component.tscn" id="12_2400l"]
+[ext_resource type="PackedScene" uid="uid://fnaly4wbnhwf" path="res://utilities/Components/Health Components/health_component.tscn" id="12_2400l"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_av5wg"]
 
@@ -20,7 +20,7 @@ radius = 261.174
 
 [node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("stateManager")]
 script = ExtResource("1_ihfay")
-speed = 50.0
+speed = 100.0
 stateManager = NodePath("StateManager")
 
 [node name="StateManager" parent="." instance=ExtResource("6_y0mdo")]

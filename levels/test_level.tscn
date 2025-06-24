@@ -44,11 +44,12 @@ shape = SubResource("RectangleShape2D_50p78")
 [node name="Player" parent="." instance=ExtResource("1_1vnm1")]
 position = Vector2(327, 285)
 scale = Vector2(3, 3)
-speed = 100.0
+motion_mode = 1
 
 [node name="Enemy" parent="." instance=ExtResource("2_jmeft")]
 position = Vector2(699, 285)
 scale = Vector2(3, 3)
+motion_mode = 1
 speed = 40.0
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]

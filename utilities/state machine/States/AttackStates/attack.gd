@@ -10,7 +10,7 @@ func enterState() -> void:
 		if parent is Player:
 			target = get_global_mouse_position()
 		elif parent is Enemy:
-			target = parent.target.global_position
+			target = parent.hitDirection
 		weapon.use(target)
 	
 func processFrame(delta: float) -> State:

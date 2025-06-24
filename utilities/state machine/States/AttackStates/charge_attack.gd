@@ -14,7 +14,8 @@ func enterState() -> void:
 		chargeTimer.start(weapon.chargeTime)
 		charging = true
 		weapon.attackRange.visible = true
-		weapon.marker.look_at(parent.target.global_position)
+		parent.hitDirection = parent.target.global_position
+		weapon.marker.look_at(parent.hitDirection)
 		
 func processFrame(delta: float) -> State:
 	if charging:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dopx06yy437aa"]
+[gd_scene load_steps=15 format=3 uid="uid://dopx06yy437aa"]
 
 [ext_resource type="Script" path="res://entities/PhysicsEntities/player/player.gd" id="1_xxrmx"]
 [ext_resource type="PackedScene" uid="uid://d2m1cfvio00nm" path="res://utilities/Components/Hitbox Component/hitbox_component.tscn" id="2_u6h0l"]
@@ -6,12 +6,13 @@
 [ext_resource type="PackedScene" uid="uid://cert0vcaupr07" path="res://utilities/state machine/state_machine.tscn" id="3_ywb0m"]
 [ext_resource type="PackedScene" uid="uid://divlo1p11l0dq" path="res://utilities/state machine/States/MoveStates/idle.tscn" id="4_8ui45"]
 [ext_resource type="PackedScene" uid="uid://cmj02vkwe0vdd" path="res://utilities/state machine/States/MoveStates/walk.tscn" id="5_kwbrq"]
+[ext_resource type="PackedScene" uid="uid://q1pmi8gip7jh" path="res://utilities/state machine/States/MoveStates/dash.tscn" id="6_b6yub"]
 [ext_resource type="PackedScene" uid="uid://bwh8l57nscl0k" path="res://utilities/state machine/States/AttackStates/attack.tscn" id="6_fwgeh"]
 [ext_resource type="PackedScene" uid="uid://cbje0cw0y0gy6" path="res://utilities/state machine/States/AttackStates/not_attacking.tscn" id="7_u6puw"]
 [ext_resource type="PackedScene" uid="uid://cg82e1r8ck2jg" path="res://entities/PhysicsEntities/weapon/weapon.tscn" id="8_msk5v"]
 [ext_resource type="PackedScene" uid="uid://cm6xw7jnqxf4g" path="res://utilities/Components/Attack Component/attack_component.tscn" id="9_s711v"]
 [ext_resource type="PackedScene" uid="uid://do6o5djrmjhhp" path="res://UI Elements/health bars/health_bar.tscn" id="10_3rbi5"]
-[ext_resource type="PackedScene" uid="uid://fnaly4wbnhwf" path="res://utilities/Components/Health Components/Health Component/health_component.tscn" id="11_8614u"]
+[ext_resource type="PackedScene" uid="uid://fnaly4wbnhwf" path="res://utilities/Components/Health Components/health_component.tscn" id="11_8614u"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_phosm"]
 radius = 8.0
@@ -28,9 +29,14 @@ startingState = NodePath("idle")
 walk = NodePath("../walk")
 animationName = "walk"
 
-[node name="walk" parent="StateManager/MovementStateMachine" node_paths=PackedStringArray("idle") instance=ExtResource("5_kwbrq")]
+[node name="walk" parent="StateManager/MovementStateMachine" node_paths=PackedStringArray("idle", "dash") instance=ExtResource("5_kwbrq")]
 idle = NodePath("../idle")
+dash = NodePath("../dash")
 animationName = "walk"
+
+[node name="dash" parent="StateManager/MovementStateMachine" node_paths=PackedStringArray("walk", "timer") instance=ExtResource("6_b6yub")]
+walk = NodePath("../walk")
+timer = NodePath("../../../dashTimer")
 
 [node name="StateMachine" parent="StateManager" node_paths=PackedStringArray("startingState") instance=ExtResource("3_ywb0m")]
 startingState = NodePath("notAttacking")
@@ -67,3 +73,6 @@ healthComponent = NodePath("../HealthComponent")
 [node name="wallCollision2" type="CollisionShape2D" parent="HitboxComponent"]
 visible = false
 shape = SubResource("CircleShape2D_phosm")
+
+[node name="dashTimer" type="Timer" parent="."]
+one_shot = true

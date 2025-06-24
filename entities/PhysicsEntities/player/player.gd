@@ -1,6 +1,8 @@
 class_name Player extends PhysicsEnity
 
-@export var speed: float
+@export var speed: float = 150
+@export var dashSpeed: float = 200
+var dashDirection: Vector2 = Vector2.ZERO
 
 @onready var stateManager: StateManager = $StateManager
 

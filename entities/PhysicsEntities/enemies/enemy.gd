@@ -4,6 +4,7 @@ class_name Enemy extends PhysicsEnity
 @export var stateManager: StateManager
 
 var target: PhysicsEnity
+var hitDirection: Vector2
 
 func _init() -> void:
 	super("enemy")
