@@ -76,11 +76,17 @@ func renderMap():
 			if grid[j][i] == null:
 				continue
 			self.add_child(grid[j][i])
-			var room = Sprite2D.new()
-			room.texture = load("res://icon.svg")
-			room.scale.x *= 0.5
-			room.scale.y *= 0.5
-			var width = room.texture.get_size().x * room.scale.x
-			var height = room.texture.get_size().y * room.scale.y
-			room.global_position = Vector2(i * width + width / 2,j * height + height / 2)
-			grid[j][i].add_child(room)
+			#var room = Sprite2D.new()
+			#room.texture = load("res://icon.svg")
+			#room.scale.x *= 0.5
+			#room.scale.y *= 0.5
+			#var width = room.texture.get_size().x * room.scale.x
+			#var height = room.texture.get_size().y * room.scale.y
+			#room.global_position = Vector2(i * width + width / 2,j * height + height / 2)
+			#grid[j][i].add_child(room)
+			
+			
+			var room = grid[j][i]
+			var width = 512
+			var height = 384
+			room.map.global_position = Vector2(i * width,j * height)
