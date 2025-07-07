@@ -13,7 +13,7 @@ func _on_play_pressed():
 	Global.gameManager.loadLevel("res://levels/test_floor.tscn")
 
 func _on_options_pressed():
-	Global.gameManager.loadGui("res://menus/options/options.tscn")
+	Global.gameManager.loadGui("res://UI Elements/menus/options/options.tscn")
 
 func _on_quit_pressed():
 	get_tree().quit()

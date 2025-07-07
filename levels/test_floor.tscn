@@ -1,15 +1,13 @@
 [gd_scene load_steps=3 format=3 uid="uid://0osdpmsajark"]
 
 [ext_resource type="PackedScene" uid="uid://bcl1f5mraax2f" path="res://utilities/World manager/level_manager.tscn" id="1_3qraa"]
-[ext_resource type="PackedScene" uid="uid://dopx06yy437aa" path="res://entities/PhysicsEntities/player/player.tscn" id="2_iw22p"]
+[ext_resource type="Script" path="res://utilities/room_camera.gd" id="2_fc7pk"]
 
 [node name="test_floor" type="Node2D"]
 
 [node name="LevelManager" parent="." instance=ExtResource("1_3qraa")]
 
-[node name="Player" parent="." instance=ExtResource("2_iw22p")]
-position = Vector2(136, 136)
-scale = Vector2(2, 2)
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
-zoom = Vector2(0.1, 0.1)
+[node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+script = ExtResource("2_fc7pk")

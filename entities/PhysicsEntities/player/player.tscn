@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dopx06yy437aa"]
+[gd_scene load_steps=16 format=3 uid="uid://dopx06yy437aa"]
 
 [ext_resource type="Script" path="res://entities/PhysicsEntities/player/player.gd" id="1_xxrmx"]
 [ext_resource type="PackedScene" uid="uid://d2m1cfvio00nm" path="res://utilities/Components/Hitbox Component/hitbox_component.tscn" id="2_u6h0l"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://cm6xw7jnqxf4g" path="res://utilities/Components/Attack Component/attack_component.tscn" id="9_s711v"]
 [ext_resource type="PackedScene" uid="uid://do6o5djrmjhhp" path="res://UI Elements/health bars/health_bar.tscn" id="10_3rbi5"]
 [ext_resource type="PackedScene" uid="uid://fnaly4wbnhwf" path="res://utilities/Components/Health Components/health_component.tscn" id="11_8614u"]
+[ext_resource type="Texture2D" uid="uid://cd0vf55nlj5oa" path="res://assets/player sprites/mage sprites/mage.png" id="14_cdg5d"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_phosm"]
 radius = 8.0
@@ -55,12 +56,16 @@ attack = NodePath("AttackComponent")
 dmg = 20.0
 knockbackForce = 0
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("14_cdg5d")
+
 [node name="wallCollision" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4)
 shape = SubResource("CircleShape2D_phosm")
 
 [node name="HealthBar" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("10_3rbi5")]
-offset_top = -13.0
-offset_bottom = -10.0
+offset_top = -20.0
+offset_bottom = -17.0
 healthComponent = NodePath("../HealthComponent")
 
 [node name="HealthComponent" parent="." instance=ExtResource("11_8614u")]

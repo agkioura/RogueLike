@@ -8,12 +8,22 @@ const gridY = 10
 var gridSize = Vector2(gridX, gridY)
 var grid = []
 
-var spawnRoom: Vector2
+var currentRoom: Room
 
 func _ready():
 	_init_grid()
 	generateFloor()
 	renderMap()
+	var player := load("res://entities/PhysicsEntities/player/player.tscn")
+	var p = player.instantiate()
+	p.global_position = currentRoom.spawnCordinates
+	get_parent().add_child.call_deferred(p)
+
+func _process(delta: float) -> void:
+	pass
+	
+func _on_room_change():
+	print("Leaving...")
 
 func _init_grid():
 	for y in range(gridY):
@@ -30,8 +40,11 @@ func clearGrid():
 func placeRoom(x: int, y: int):
 	if x >= 0 and x < gridX and y >= 0 and y < gridY:
 		if grid[y][x] == null:
-			var newRoom = Room.new()
-			newRoom.position = Vector2(x, y)
+			var newRoom = load("res://utilities/World manager/room.tscn").instantiate()
+			newRoom.setPosition(x, y)
+			newRoom.setSpawn(x, y)
+			newRoom.exit.connect(_on_room_change)
+			#newRoom.disableGates()
 			grid[y][x] = newRoom
 	print("Placed room at: (", x, ", ", y, ")")
 
@@ -59,7 +72,7 @@ func generateFloor():
 	var roomCount = 9
 	var start := Vector2(rng.randi_range(gridX / 3, 2 * gridX / 3), rng.randi_range(gridY / 3, 2 * gridY / 3))
 	placeRoom(start.x, start.y)
-	spawnRoom = Vector2(start.x, start.y)
+	currentRoom = grid[start.y][start.x]
 	var nextRoom :Vector2 = choosePosition(start.x, start.y)
 	
 	while (roomCount > 0 && nextRoom.x != -1):
@@ -87,6 +100,6 @@ func renderMap():
 			
 			
 			var room = grid[j][i]
-			var width = 512
-			var height = 384
+			var width = room.width
+			var height = room.height
 			room.map.global_position = Vector2(i * width,j * height)

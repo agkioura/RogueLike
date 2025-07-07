@@ -18,6 +18,14 @@ config/icon="res://icon.svg"
 [autoload]
 
 Global="*res://utilities/Game Manager/global.gd"
+Events="*res://utilities/Game Manager/events.gd"
+
+[display]
+
+window/size/viewport_width=512
+window/size/viewport_height=320
+window/stretch/mode="viewport"
+window/vsync/vsync_mode=0
 
 [editor]
 

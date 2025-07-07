@@ -16,7 +16,7 @@ func _on_volume_changed(value: float):
 	Global.gameManager.musicPlayer.volume_db = linear_to_db(value)
 	
 func _on_back_pressed():
-	Global.gameManager.loadGui("res://menus/main menu/main_menu.tscn")
+	Global.gameManager.loadGui("res://UI Elements/menus/main menu/main_menu.tscn")
 	
 func _on_fullscreen_toggled(toggled: bool):
 	Global.fullscreen = toggled
