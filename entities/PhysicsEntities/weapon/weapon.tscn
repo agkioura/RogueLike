@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://cg82e1r8ck2jg"]
+[gd_scene load_steps=9 format=3 uid="uid://cg82e1r8ck2jg"]
 
 [ext_resource type="Script" path="res://entities/PhysicsEntities/weapon/weapon.gd" id="1_b1djg"]
+[ext_resource type="Texture2D" uid="uid://d3nub0u3eycyf" path="res://assets/weapons/sword.png" id="2_cc175"]
+[ext_resource type="Texture2D" uid="uid://bqudh3ce1p16q" path="res://assets/weapons/New Piskel (7).png" id="3_qjg1j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ahw3q"]
-size = Vector2(7, 43)
+size = Vector2(7, 35)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_irivl"]
 size = Vector2(59, 112)
@@ -13,7 +15,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Pivot/Sprite2D/Area2D/CollisionShape2D:disabled")
+tracks/0/path = NodePath("Pivot/weapon_sprite/Area2D/CollisionShape2D:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -25,7 +27,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Pivot/Sprite2D:visible")
+tracks/1/path = NodePath("Pivot/weapon_sprite:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -37,7 +39,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Pivot/Sprite2D:rotation")
+tracks/2/path = NodePath("Pivot/weapon_sprite:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -46,6 +48,30 @@ tracks/2/keys = {
 "update": 0,
 "values": [0.0]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Pivot/swipe_sprite:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Pivot/swipe_sprite:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_7jbs7"]
 resource_name = "attack1"
@@ -53,7 +79,7 @@ length = 0.233337
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Pivot/Sprite2D:visible")
+tracks/0/path = NodePath("Pivot/weapon_sprite:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -65,19 +91,19 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Pivot/Sprite2D/Area2D/CollisionShape2D:disabled")
+tracks/1/path = NodePath("Pivot/weapon_sprite/Area2D/CollisionShape2D:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.166667),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.0333333, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [false, true]
+"values": [true, false, true]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Pivot/Sprite2D:rotation")
+tracks/2/path = NodePath("Pivot/weapon_sprite:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -85,6 +111,30 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [0.0, 3.14159]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Pivot/swipe_sprite:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.0333333, 0.0666667, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Pivot/swipe_sprite:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.233333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_aj060"]
@@ -98,28 +148,37 @@ script = ExtResource("1_b1djg")
 
 [node name="Pivot" type="Marker2D" parent="."]
 
-[node name="Sprite2D" type="Sprite2D" parent="Pivot"]
+[node name="weapon_sprite" type="Sprite2D" parent="Pivot"]
 visible = false
-offset = Vector2(0, -32)
+position = Vector2(-0.5, 0)
+texture = ExtResource("2_cc175")
+offset = Vector2(0, -24)
 
-[node name="Area2D" type="Area2D" parent="Pivot/Sprite2D"]
+[node name="Area2D" type="Area2D" parent="Pivot/weapon_sprite"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/Sprite2D/Area2D"]
-position = Vector2(0.499998, -34.5)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/weapon_sprite/Area2D"]
+position = Vector2(0.5, -25)
 shape = SubResource("RectangleShape2D_ahw3q")
 disabled = true
 
 [node name="ChargeArea" type="Area2D" parent="Pivot"]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/ChargeArea"]
 visible = false
 position = Vector2(27, 0)
 shape = SubResource("RectangleShape2D_irivl")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="swipe_sprite" type="Sprite2D" parent="Pivot"]
+visible = false
+position = Vector2(30, 1)
+texture = ExtResource("3_qjg1j")
+hframes = 3
+
+[node name="swordAnimation" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_aj060")
 }
 
-[connection signal="area_entered" from="Pivot/Sprite2D/Area2D" to="." method="_on_area_2d_area_entered"]
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="area_entered" from="Pivot/weapon_sprite/Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="animation_finished" from="swordAnimation" to="." method="_on_animation_player_animation_finished"]
