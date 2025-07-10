@@ -11,6 +11,7 @@ var gridSize = Vector2(gridX, gridY)
 var grid = []
 
 var currentRoom: Room
+var player: Player
 
 # 0 up, 1 down, 2 left, 3 right
 var directions = [
@@ -24,10 +25,10 @@ func _ready():
 	_init_grid()
 	generateFloor()
 	renderMap()
-	var player := load("res://entities/PhysicsEntities/player/player.tscn")
-	var p = player.instantiate()
-	p.global_position = currentRoom.spawnCordinates
-	get_parent().add_child.call_deferred(p)
+	var p := load("res://entities/PhysicsEntities/player/player.tscn")
+	player = p.instantiate()
+	player.global_position = currentRoom.spawnCordinates
+	get_parent().add_child.call_deferred(player)
 	
 func _on_room_change():
 	print("Leaving...")
@@ -137,6 +138,7 @@ func generateFloor():
 	placeRoom(start.x, start.y)
 	roomCount -= 1
 	currentRoom = grid[start.y][start.x]
+	currentRoom.type = "spawn"
 	generateDoors(currentRoom, roomQueue)
 	var nextRoom: Vector2
 	while (roomCount > 0 && not roomQueue.is_empty()):

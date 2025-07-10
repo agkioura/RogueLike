@@ -2,12 +2,12 @@ class_name Room extends Node2D
 
 signal exit
 
-var doors = []
 var map : Node2D
 var width: int = 32 * 15
 var height: int = 32 * 9
 var spawnCordinates : Vector2
 var gridIndex: Vector2
+var type: String
 
 var doorBitMap: Array = [0, 0, 0, 0] # 0 up, 1 down, 2 left, 3 right
 
@@ -57,6 +57,11 @@ func _ready() -> void:
 
 func _on_room_entered(body: Node2D):
 	if body is Player:
+		if type != "spawn":
+			var enemy = load("res://entities/PhysicsEntities/enemies/enemy.tscn").instantiate()
+			enemy.global_position = spawnCordinates
+			enemy.target = get_parent().player
+			get_parent().add_child(enemy)
 		Events.entered_room.emit(self)
 
 func _on_room_exited(body: Node2D):

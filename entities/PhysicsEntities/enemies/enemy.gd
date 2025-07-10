@@ -2,6 +2,8 @@ class_name Enemy extends PhysicsEnity
 
 @export var speed: float
 @export var stateManager: StateManager
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var enemy_sprite: Sprite2D = $EnemySprite
 
 var target: PhysicsEnity
 var hitDirection: Vector2
