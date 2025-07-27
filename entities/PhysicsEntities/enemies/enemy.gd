@@ -8,6 +8,13 @@ class_name Enemy extends PhysicsEnity
 var target: PhysicsEnity
 var hitDirection: Vector2
 
+func setTarget(target: PhysicsEnity) -> void:
+	self.target = target
+	target.removed.connect(clearTarget)
+
+func clearTarget() -> void:
+	self.target = null
+
 func _init() -> void:
 	super("enemy")
 	

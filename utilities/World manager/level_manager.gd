@@ -25,10 +25,18 @@ func _ready():
 	_init_grid()
 	generateFloor()
 	renderMap()
+	loadPlayer()
+	loadGui()
+	
+func loadPlayer() -> void:
 	var p := load("res://entities/PhysicsEntities/player/player.tscn")
 	player = p.instantiate()
 	player.global_position = currentRoom.spawnCordinates
+	Global.player = player
 	get_parent().add_child.call_deferred(player)
+	
+func loadGui() -> void:
+	Global.gameManager.loadGui("res://UI Elements/health bars/player_health_bar.tscn")
 	
 func _on_room_change():
 	print("Leaving...")
@@ -77,9 +85,9 @@ func generateDoors(currentRoom: Room, roomQueue: Array):
 	
 	var doorCount
 	if roomQueue.is_empty():
-		doorCount = rng.randi_range(1, 4)
+		doorCount = rng.randi_range(1, 2)
 	else:
-		doorCount = rng.randi_range(1, 3)
+		doorCount = rng.randi_range(1, 2)
 		
 	var count = 0
 	var visitedDirections = []

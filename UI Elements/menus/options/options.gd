@@ -21,6 +21,6 @@ func _on_back_pressed():
 func _on_fullscreen_toggled(toggled: bool):
 	Global.fullscreen = toggled
 	if toggled:
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)

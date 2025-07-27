@@ -60,8 +60,8 @@ func _on_room_entered(body: Node2D):
 		if type != "spawn":
 			var enemy = load("res://entities/PhysicsEntities/enemies/enemy.tscn").instantiate()
 			enemy.global_position = spawnCordinates
-			enemy.target = get_parent().player
-			get_parent().add_child(enemy)
+			enemy.setTarget(get_parent().player)
+			get_parent().add_child.call_deferred(enemy)
 		Events.entered_room.emit(self)
 
 func _on_room_exited(body: Node2D):

@@ -1,5 +1,7 @@
 class_name HealthComponent extends Node2D
 
+signal damaged
+
 @export var maxHealth : float
 @export var health : float
 
@@ -9,3 +11,4 @@ func updateHealth(damage: float):
 		get_parent().queue_free()
 	else:
 		health -= damage
+	damaged.emit(self)

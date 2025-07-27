@@ -1,15 +1,24 @@
 class_name Dash extends State
 
 @export var walk: State
-@export var timer: Timer
+@onready var dash_duration: Timer = $dashDuration
+@onready var dash_cooldown: Timer = $dashCooldown
+
+func enterState() -> void:
+	if parent.hitbox_component:
+		parent.hitbox_component.disabled = true
+	if dash_cooldown.is_stopped():
+		dash_duration.start(0.1)
 
 func exitState() -> void:
-	if timer and timer.is_stopped():
-		timer.start(1)
+	if parent.hitbox_component:
+		parent.hitbox_component.disabled = false
+	if dash_cooldown.is_stopped():
+		dash_cooldown.start(1)
 
 func processPhysics(delta: float) -> State:
-	if timer.is_stopped():
-		parent.velocity = parent.dashDirection * parent.speed * 50
-		parent.velocity = parent.velocity.move_toward(Vector2.ZERO, 0)
+	if !dash_duration.is_stopped():
+		parent.velocity = parent.dashDirection * 800
 		parent.move_and_slide()
+		return null
 	return walk

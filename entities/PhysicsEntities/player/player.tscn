@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dopx06yy437aa"]
+[gd_scene load_steps=19 format=3 uid="uid://dopx06yy437aa"]
 
 [ext_resource type="Script" path="res://entities/PhysicsEntities/player/player.gd" id="1_xxrmx"]
 [ext_resource type="PackedScene" uid="uid://d2m1cfvio00nm" path="res://utilities/Components/Hitbox Component/hitbox_component.tscn" id="2_u6h0l"]
@@ -11,7 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://cbje0cw0y0gy6" path="res://utilities/state machine/States/AttackStates/not_attacking.tscn" id="7_u6puw"]
 [ext_resource type="PackedScene" uid="uid://cg82e1r8ck2jg" path="res://entities/PhysicsEntities/weapon/weapon.tscn" id="8_msk5v"]
 [ext_resource type="PackedScene" uid="uid://cm6xw7jnqxf4g" path="res://utilities/Components/Attack Component/attack_component.tscn" id="9_s711v"]
-[ext_resource type="PackedScene" uid="uid://do6o5djrmjhhp" path="res://UI Elements/health bars/health_bar.tscn" id="10_3rbi5"]
 [ext_resource type="PackedScene" uid="uid://fnaly4wbnhwf" path="res://utilities/Components/Health Components/health_component.tscn" id="11_8614u"]
 [ext_resource type="Texture2D" uid="uid://bi407vwvh6h5i" path="res://assets/player sprites/knight.png" id="11_sfaie"]
 
@@ -85,11 +84,14 @@ _data = {
 "walk": SubResource("Animation_wnj5c")
 }
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("animation_player")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("hitbox_component", "health_component", "animation_player")]
+y_sort_enabled = true
 motion_mode = 1
 script = ExtResource("1_xxrmx")
 speed = 100.0
 dashSpeed = 150.0
+hitbox_component = NodePath("HitboxComponent")
+health_component = NodePath("HealthComponent")
 animation_player = NodePath("AnimationPlayer")
 
 [node name="StateManager" parent="." instance=ExtResource("3_cmj32")]
@@ -106,9 +108,8 @@ idle = NodePath("../idle")
 dash = NodePath("../dash")
 animationName = "walk"
 
-[node name="dash" parent="StateManager/MovementStateMachine" node_paths=PackedStringArray("walk", "timer") instance=ExtResource("6_b6yub")]
+[node name="dash" parent="StateManager/MovementStateMachine" node_paths=PackedStringArray("walk") instance=ExtResource("6_b6yub")]
 walk = NodePath("../walk")
-timer = NodePath("../../../dashTimer")
 
 [node name="StateMachine" parent="StateManager" node_paths=PackedStringArray("startingState") instance=ExtResource("3_ywb0m")]
 startingState = NodePath("notAttacking")
@@ -121,6 +122,7 @@ weapon = NodePath("../../../Weapon")
 attack = NodePath("../attack")
 
 [node name="Weapon" parent="." node_paths=PackedStringArray("attack") instance=ExtResource("8_msk5v")]
+weaponType = 1
 attack = NodePath("AttackComponent")
 
 [node name="AttackComponent" parent="Weapon" instance=ExtResource("9_s711v")]
@@ -130,11 +132,6 @@ knockbackForce = 0
 [node name="wallCollision" type="CollisionShape2D" parent="."]
 position = Vector2(0, 8)
 shape = SubResource("CapsuleShape2D_ey0pn")
-
-[node name="HealthBar" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("10_3rbi5")]
-offset_top = -20.0
-offset_bottom = -17.0
-healthComponent = NodePath("../HealthComponent")
 
 [node name="HealthComponent" parent="." instance=ExtResource("11_8614u")]
 maxHealth = 100.0
@@ -147,15 +144,13 @@ healthComponent = NodePath("../HealthComponent")
 position = Vector2(0, 2)
 shape = SubResource("CapsuleShape2D_c4gvl")
 
-[node name="dashTimer" type="Timer" parent="."]
-one_shot = true
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_eiaup")
 }
 
 [node name="PlayerSprite" type="Sprite2D" parent="."]
+y_sort_enabled = true
 texture = ExtResource("11_sfaie")
 offset = Vector2(-0.5, 0)
 hframes = 4

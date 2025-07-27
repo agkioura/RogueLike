@@ -1,8 +1,11 @@
 class_name Player extends PhysicsEnity
 
 @export var speed: float = 150
-@export var dashSpeed: float = 200
+@export var dashSpeed: float = 800
 var dashDirection: Vector2 = Vector2.ZERO
+
+@export var hitbox_component: HitboxComponent
+@export var health_component: HealthComponent
 
 @export var animation_player: AnimationPlayer
 @onready var stateManager: StateManager = $StateManager

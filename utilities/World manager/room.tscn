@@ -22,12 +22,14 @@ size = Vector2(8, 32)
 script = ExtResource("1_1mmao")
 
 [node name="playerDetector" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="playerDetector"]
 position = Vector2(240, 144)
 shape = SubResource("RectangleShape2D_ey5gg")
 
 [node name="DoorUp" parent="." instance=ExtResource("2_2gkth")]
+visible = false
 
 [node name="Marker2D" parent="DoorUp" index="0"]
 position = Vector2(240, -32)
@@ -37,6 +39,7 @@ position = Vector2(240, 4)
 shape = SubResource("RectangleShape2D_dmufc")
 
 [node name="DoorDown" parent="." instance=ExtResource("2_2gkth")]
+visible = false
 
 [node name="Marker2D" parent="DoorDown" index="0"]
 position = Vector2(240, 320)
@@ -46,6 +49,7 @@ position = Vector2(240, 284)
 shape = SubResource("RectangleShape2D_t5n6n")
 
 [node name="DoorLeft" parent="." instance=ExtResource("2_2gkth")]
+visible = false
 
 [node name="Marker2D" parent="DoorLeft" index="0"]
 position = Vector2(-32, 144)
@@ -55,6 +59,7 @@ position = Vector2(4, 144)
 shape = SubResource("RectangleShape2D_jx1hd")
 
 [node name="DoorRight" parent="." instance=ExtResource("2_2gkth")]
+visible = false
 
 [node name="Marker2D" parent="DoorRight" index="0"]
 position = Vector2(512, 144)

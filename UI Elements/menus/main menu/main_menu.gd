@@ -1,8 +1,8 @@
 extends CanvasLayer
 
-@onready var play_button = $MainMenu/VBoxContainer/PlayButton
-@onready var options_button = $MainMenu/VBoxContainer/OptionsButton
-@onready var quit_button = $MainMenu/VBoxContainer/QuitButton
+@onready var play_button = $MainMenu/Buttons/PlayButton
+@onready var options_button = $MainMenu/Buttons/OptionsButton
+@onready var quit_button = $MainMenu/Buttons/QuitButton
 
 func _ready():
 	play_button.pressed.connect(_on_play_pressed)

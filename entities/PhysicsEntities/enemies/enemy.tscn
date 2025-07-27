@@ -132,8 +132,9 @@ offset_bottom = -13.0
 healthComponent = NodePath("../HealthComponent")
 
 [node name="Weapon" parent="." node_paths=PackedStringArray("attack") instance=ExtResource("10_881g2")]
+weaponType = 2
 attack = NodePath("AttackComponent")
-chargeTime = 1.0
+chargeTime = 0.5
 
 [node name="AttackComponent" parent="Weapon" instance=ExtResource("10_vyxy5")]
 dmg = 13.0

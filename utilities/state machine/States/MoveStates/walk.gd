@@ -6,6 +6,10 @@ class_name Walk extends State
 func enterState() -> void:
 	if parent.animation_player:
 		parent.animation_player.play("walk")
+
+func exitState() -> void:
+	if parent.animation_player:
+		parent.animation_player.stop()
 	
 func processInput(event : InputEvent) -> State:
 	if !Input.get_vector("left", "right", "up", "down"):

@@ -16,6 +16,7 @@ func enterState() -> void:
 		weapon.attackRange.visible = true
 		parent.hitDirection = parent.target.global_position
 		weapon.marker.look_at(parent.hitDirection)
+		weapon.charge()
 		
 func processFrame(delta: float) -> State:
 	if charging:
