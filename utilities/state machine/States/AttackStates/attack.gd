@@ -4,7 +4,6 @@ class_name Attack extends State
 @export var weapon: Weapon
 
 func enterState() -> void:
-	var pos = parent.global_position
 	if weapon:
 		var target
 		if parent is Player:

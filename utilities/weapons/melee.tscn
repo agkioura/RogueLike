@@ -1,0 +1,213 @@
+[gd_scene load_steps=14 format=3 uid="uid://sah6taq8jlpl"]
+
+[ext_resource type="Script" path="res://utilities/weapons/melee.gd" id="1_jfibx"]
+[ext_resource type="Texture2D" uid="uid://caycpqjxhbmyw" path="res://assets/enemy sprites/bat_attack.png" id="1_kbret"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hq7xm"]
+radius = 9.0
+height = 26.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mmrog"]
+size = Vector2(64, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_04wdw"]
+bg_color = Color(0.6, 0.6, 0.6, 0.243137)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_af1n4"]
+bg_color = Color(0.654902, 0, 0, 0.243137)
+
+[sub_resource type="Animation" id="Animation_bcwgs"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/melee_sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot/melee_sprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Pivot/melee_sprite/hitbox/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_u22c6"]
+resource_name = "attack_dash"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/melee_sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(115, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot/melee_sprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Pivot/melee_sprite/hitbox/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1yc5p"]
+_data = {
+"RESET": SubResource("Animation_bcwgs"),
+"attack_dash": SubResource("Animation_u22c6")
+}
+
+[sub_resource type="Animation" id="Animation_rbjaq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Area2D/ProgressBar:value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_4qxfe"]
+resource_name = "charge_dash"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Area2D/ProgressBar:value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 100.0]
+}
+
+[sub_resource type="Animation" id="Animation_uxjdk"]
+resource_name = "set_dash"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Area2D/CollisionShape2D:shape:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(64, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot/Area2D/CollisionShape2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(64, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2t8e8"]
+_data = {
+"RESET": SubResource("Animation_rbjaq"),
+"charge_dash": SubResource("Animation_4qxfe"),
+"set_dash": SubResource("Animation_uxjdk")
+}
+
+[node name="Meelee" type="Node2D"]
+script = ExtResource("1_jfibx")
+meleeType = 1
+
+[node name="Pivot" type="Marker2D" parent="."]
+
+[node name="melee_sprite" type="Sprite2D" parent="Pivot"]
+rotation = 1.5708
+texture = ExtResource("1_kbret")
+
+[node name="hitbox" type="Area2D" parent="Pivot/melee_sprite"]
+rotation = -1.5708
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/melee_sprite/hitbox"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_hq7xm")
+disabled = true
+
+[node name="Area2D" type="Area2D" parent="Pivot"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/Area2D"]
+position = Vector2(64, 0)
+shape = SubResource("RectangleShape2D_mmrog")
+disabled = true
+
+[node name="ProgressBar" type="ProgressBar" parent="Pivot/Area2D"]
+offset_top = -10.0
+offset_right = 128.0
+offset_bottom = 10.0
+theme_override_styles/background = SubResource("StyleBoxFlat_04wdw")
+theme_override_styles/fill = SubResource("StyleBoxFlat_af1n4")
+show_percentage = false
+
+[node name="meleeAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_1yc5p")
+}
+
+[node name="chargeAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2t8e8")
+}
+
+[connection signal="area_entered" from="Pivot/melee_sprite/hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="animation_finished" from="meleeAnimation" to="." method="_on_melee_animation_animation_finished"]

@@ -1,7 +1,8 @@
 [gd_scene load_steps=18 format=3 uid="uid://cg82e1r8ck2jg"]
 
-[ext_resource type="Script" path="res://entities/PhysicsEntities/weapon/weapon.gd" id="1_b1djg"]
+[ext_resource type="Script" path="res://utilities/weapons/sword.gd" id="1_b1djg"]
 [ext_resource type="Texture2D" uid="uid://meglhe3s6quv" path="res://assets/weapons/swords/sword.png" id="2_gyvoo"]
+[ext_resource type="Texture2D" uid="uid://bi407vwvh6h5i" path="res://assets/player sprites/knight.png" id="2_kd2yk"]
 [ext_resource type="Texture2D" uid="uid://dj4s1q4xtj1tm" path="res://assets/weapons/swords/New Piskel (7).png" id="3_kvi8t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ahw3q"]
@@ -13,106 +14,7 @@ bg_color = Color(0.6, 0.6, 0.6, 0.243137)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4n7r8"]
 bg_color = Color(0.654902, 0, 0, 0.243137)
 
-[sub_resource type="Animation" id="Animation_lvhtp"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Pivot/hitbox/CollisionShape2D:disabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Pivot/Marker2D/weapon_sprite:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Pivot/Marker2D/weapon_sprite:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Pivot/swipe_sprite:frame")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Pivot/swipe_sprite:visible")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Pivot/Marker2D/weapon_sprite:offset")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, -16)]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("Pivot/Marker2D/weapon_sprite:position")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(10, 0)]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("Pivot/Marker2D:rotation")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [-1.19206]
-}
-
-[sub_resource type="Animation" id="Animation_n28lu"]
+[sub_resource type="Animation" id="Animation_v2jrr"]
 resource_name = "attack_slash_1"
 length = 0.333337
 tracks/0/type = "value"
@@ -125,7 +27,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.333333),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [true, false]
+"values": [true, true]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -146,10 +48,10 @@ tracks/2/path = NodePath("Pivot/Marker2D/weapon_sprite:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.233333),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.166667, 0.333333),
+"transitions": PackedFloat32Array(1, 0.0915056, 1),
 "update": 0,
-"values": [0.0, 2.0944]
+"values": [0.0, -0.698132, 0.0]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -185,7 +87,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [-1.5708, 1.5708]
+"values": [-1.22173, 4.18879]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -194,13 +96,25 @@ tracks/6/path = NodePath("Pivot/Marker2D/weapon_sprite:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.166667, 0.333333),
+"transitions": PackedFloat32Array(1, 0.0669858, 0.0669858, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -10), Vector2(0, -10), Vector2(0, 0)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Pivot/Marker2D/weapon_sprite:offset")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(16, 0)]
+"values": [Vector2(0, -16)]
 }
 
-[sub_resource type="Animation" id="Animation_v2jrr"]
+[sub_resource type="Animation" id="Animation_ifs11"]
 resource_name = "attack_slash_2"
 length = 0.333337
 tracks/0/type = "value"
@@ -213,7 +127,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.333333),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [true, false]
+"values": [true, true]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -234,10 +148,10 @@ tracks/2/path = NodePath("Pivot/Marker2D/weapon_sprite:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.233333),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.166667, 0.333333),
+"transitions": PackedFloat32Array(1, 0.0220971, 1),
 "update": 0,
-"values": [3.14159, 1.0472]
+"values": [0.0, 0.698132, 0.0]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -273,7 +187,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [1.5708, -1.5708]
+"values": [4.18879, -1.22173]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -282,10 +196,22 @@ tracks/6/path = NodePath("Pivot/Marker2D/weapon_sprite:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.166667, 0.333333),
+"transitions": PackedFloat32Array(1, 0.0669858, 0.0669858, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -10), Vector2(0, -10), Vector2(0, 0)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Pivot/Marker2D/weapon_sprite:offset")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(16, 0)]
+"values": [Vector2(0, -16)]
 }
 
 [sub_resource type="Animation" id="Animation_utyhm"]
@@ -337,7 +263,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.333333),
 "transitions": PackedFloat32Array(0.164939, 1),
 "update": 0,
-"values": [Vector2(0, 7), Vector2(0, 40)]
+"values": [Vector2(0, -15), Vector2(0, 10)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -349,14 +275,25 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 0)]
+"values": [Vector2(0, -16)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Pivot/Marker2D:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-1.5708]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_aj060"]
 _data = {
-"RESET": SubResource("Animation_lvhtp"),
-"attack_slash_1": SubResource("Animation_n28lu"),
-"attack_slash_2": SubResource("Animation_v2jrr"),
+"attack_slash_1": SubResource("Animation_v2jrr"),
+"attack_slash_2": SubResource("Animation_ifs11"),
 "attack_thrust_1": SubResource("Animation_utyhm")
 }
 
@@ -656,11 +593,11 @@ script = ExtResource("1_b1djg")
 [node name="Pivot" type="Marker2D" parent="."]
 
 [node name="Marker2D" type="Marker2D" parent="Pivot"]
-rotation = -1.19206
+position = Vector2(11, -2.38419e-07)
+rotation = -1.22173
 
 [node name="weapon_sprite" type="Sprite2D" parent="Pivot/Marker2D"]
 y_sort_enabled = true
-position = Vector2(10, 0)
 texture = ExtResource("2_gyvoo")
 offset = Vector2(0, -16)
 
@@ -670,6 +607,16 @@ position = Vector2(26, -2.14577e-06)
 scale = Vector2(1.625, 1.3125)
 texture = ExtResource("3_kvi8t")
 hframes = 3
+frame = 2
+
+[node name="PlayerSprite" type="Sprite2D" parent="Pivot"]
+visible = false
+y_sort_enabled = true
+texture = ExtResource("2_kd2yk")
+offset = Vector2(-0.5, 0)
+flip_h = true
+hframes = 4
+frame = 2
 
 [node name="hitbox" type="Area2D" parent="Pivot"]
 rotation = 3.14159
@@ -681,16 +628,16 @@ disabled = true
 
 [node name="ProgressBar" type="ProgressBar" parent="Pivot/hitbox"]
 visible = false
-offset_left = -44.9999
-offset_top = -40.0001
-offset_right = 9.91821e-05
-offset_bottom = 39.9999
+offset_left = -46.0
+offset_top = -40.0
+offset_right = -1.0
+offset_bottom = 40.0
 theme_override_styles/background = SubResource("StyleBoxFlat_b3753")
 theme_override_styles/fill = SubResource("StyleBoxFlat_4n7r8")
 fill_mode = 1
 show_percentage = false
 
-[node name="swordAnimation" type="AnimationPlayer" parent="." groups=["enemies"]]
+[node name="swordAnimation" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_aj060")
 }

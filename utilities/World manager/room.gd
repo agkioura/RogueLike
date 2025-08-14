@@ -41,7 +41,11 @@ func setPosition(x, y) -> void:
 	
 func createEnemies() -> void:
 	for i in range(enemyCount):
-		var enemy = load("res://entities/PhysicsEntities/enemies/enemy.tscn").instantiate()
+		var enemy
+		if i < 2:
+			enemy = load("res://entities/PhysicsEntities/enemies/bat.tscn").instantiate()
+		else:
+			enemy = load("res://entities/PhysicsEntities/enemies/enemy.tscn").instantiate()
 		match i:
 			0:
 				enemy.global_position = spawn_point_1.global_position
@@ -51,14 +55,12 @@ func createEnemies() -> void:
 				enemy.global_position = spawn_point_3.global_position
 			3:
 				enemy.global_position = spawn_point_4.global_position
-				
+		
 		enemy.removed.connect(_on_removed)
 		enemies.push_back(enemy)
 	
 
 func _ready() -> void:
-	if type != "spawn":
-		createEnemies()
 	var room = Node2D.new()
 	if doorBitMap[0]:
 		room.add_child(up)
@@ -79,6 +81,8 @@ func _ready() -> void:
 	room.add_child(_floor)
 	self.add_child(room)
 	map = room
+	if type != "spawn":
+		createEnemies()
 	
 	player_detector.body_entered.connect(_on_room_entered)
 	player_detector.body_exited.connect(_on_room_exited)
@@ -92,14 +96,14 @@ func _on_room_entered(body: Node2D):
 	if body is Player:
 		if type != "spawn":
 			for e in enemies:
-				e.setTarget(Global.player)
+				#e.setTarget(Global.player)
 				floor.entities.add_child.call_deferred(e)
 		Events.entered_room.emit(self)
 
 func _on_room_exited(body: Node2D):
 	if body is Player:
 		for e in enemies:
-			e.target.removed.disconnect(e.clearTarget)
-			e.clearTarget()
-			floor.entities.remove_child(e)
+			#e.target.removed.disconnect(e.clearTarget)
+			#e.clearTarget()
+			floor.entities.remove_child.call_deferred(e)
 		self.exit.emit()
