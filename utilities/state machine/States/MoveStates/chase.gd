@@ -5,6 +5,7 @@ class_name Chase extends State
 
 @export var nav: NavigationAgent2D
 @export var agroRadius: Area2D
+@export var attackRadius: Area2D
 
 func _ready() -> void:
 	if agroRadius:
@@ -18,11 +19,12 @@ func enterState() -> void:
 	
 func exitState() -> void:
 	parent.animation_player.stop()
+		
 	
 func processPhysics(delta : float) -> State:
 	if !parent.target:
 		return patrol
-	if (parent.global_position.distance_to(parent.target.global_position) <= 32):
+	if attackRadius.overlaps_body(parent.target):
 		return chargeAttack
 		
 	var next_point = parent.target.global_position

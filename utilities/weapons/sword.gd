@@ -1,4 +1,4 @@
-class_name Weapon extends Node2D
+class_name Sword extends Weapon
 
 @export_enum("none", "sword", "rusty sword") var weaponType: int
 	
@@ -10,10 +10,7 @@ class_name Weapon extends Node2D
 @export var attack: AttackComponent
 @onready var progress_bar: ProgressBar = $Pivot/hitbox/ProgressBar
 
-
-@export var chargeTime: float = 0.0
 var chargeStartTime: int
-var inUse: bool = false
 
 var weaponSprites: Dictionary = {
 	1: "res://assets/weapons/swords/sword.png",
@@ -30,7 +27,23 @@ var attackNumber: int = 1
 func _ready() -> void:
 	if weaponType != 0:
 		weaponSprite.texture = load(weaponSprites[weaponType])
-
+		
+	if get_parent() is Player:
+		weaponSprite.visible = true
+	else:
+		weaponSprite.visible = false
+		
+func _process(delta: float) -> void:
+	if !inUse && get_parent() is Player:
+		var mouse := get_global_mouse_position()
+		marker.look_at(mouse)
+		#if mouse.x - get_parent().global_position.x < 0:
+			#if marker.scale.y == 1:
+				#marker.scale.y = -1
+		#else:
+			#if marker.scale.y == -1:
+				#marker.scale.y = 1
+				
 func use(target) -> void:
 	inUse = true
 	charge_animation.play("set_" + attackType[attack.dmgType])
@@ -45,13 +58,6 @@ func use(target) -> void:
 		animation.play("attack_" + attackType[attack.dmgType] + "_" + str(attackNumber))
 	
 	marker.look_at(target)
-	
-	if get_global_mouse_position().x - target.x < 0:
-		if marker.scale.y == 1:
-			marker.scale.y = -1
-	else:
-		if marker.scale.y == -1:
-			marker.scale.y = 1
 			
 func charge() -> void:
 	charge_animation.speed_scale = 1 / chargeTime
