@@ -15,4 +15,4 @@ func _ready() -> void:
 	loadGui()
 	
 func loadGui() -> void:
-	Global.gameManager.loadGui("res://UI Elements/health bars/player_health_bar.tscn")
+	Global.gameManager.loadGui("res://UI Elements/player UI/player_ui.tscn")

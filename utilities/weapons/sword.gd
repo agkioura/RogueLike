@@ -6,9 +6,9 @@ class_name Sword extends Weapon
 @onready var animation = $swordAnimation
 @onready var charge_animation: AnimationPlayer = $chargeAnimation
 
-@onready var weaponSprite: Sprite2D = $Pivot/Marker2D/weapon_sprite
+@onready var weaponSprite: Sprite2D = $Pivot/weapon_sprite
+
 @export var attack: AttackComponent
-@onready var progress_bar: ProgressBar = $Pivot/hitbox/ProgressBar
 
 var chargeStartTime: int
 
@@ -22,43 +22,27 @@ var attackType: Dictionary = {
 	1: "thrust"
 }
 
-var attackNumber: int = 1
-
 func _ready() -> void:
 	if weaponType != 0:
 		weaponSprite.texture = load(weaponSprites[weaponType])
-		
-	if get_parent() is Player:
-		weaponSprite.visible = true
-	else:
-		weaponSprite.visible = false
-		
-func _process(delta: float) -> void:
-	if !inUse && get_parent() is Player:
-		var mouse := get_global_mouse_position()
-		marker.look_at(mouse)
-		#if mouse.x - get_parent().global_position.x < 0:
-			#if marker.scale.y == 1:
-				#marker.scale.y = -1
-		#else:
-			#if marker.scale.y == -1:
-				#marker.scale.y = 1
-				
+
 func use(target) -> void:
 	inUse = true
-	charge_animation.play("set_" + attackType[attack.dmgType])
-	if attack.dmgType == 0:
-		if attackNumber == 1:
-			animation.play("attack_" + attackType[attack.dmgType] + "_" + str(attackNumber))
-			attackNumber += 1
-		elif attackNumber == 2:
-			animation.play("attack_" + attackType[attack.dmgType] + "_" + str(attackNumber))
-			attackNumber -= 1
+	# ama to target einai kati ektos vector2d tha bgalei thema
+	if target.x - global_position.x < 0:
+		if marker.scale.y == 1:
+			marker.scale.y = -1
 	else:
-		animation.play("attack_" + attackType[attack.dmgType] + "_" + str(attackNumber))
-	
+		if marker.scale.y == -1:
+			marker.scale.y = 1
+
 	marker.look_at(target)
-			
+	animation.speed_scale = 1 / attack.attackSpeed
+	if attack.dmgType == 0:
+		animation.play("attack_" + attackType[attack.dmgType])
+	else:
+		animation.play("attack_" + attackType[attack.dmgType])
+	
 func charge() -> void:
 	charge_animation.speed_scale = 1 / chargeTime
 	charge_animation.play("charge_" + attackType[attack.dmgType])

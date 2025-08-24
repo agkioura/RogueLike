@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://do4pg6erljq5h"]
+
+[ext_resource type="PackedScene" uid="uid://bwsk7wada6uti" path="res://UI Elements/health bars/player_health_bar.tscn" id="1_kp0om"]
+[ext_resource type="Script" path="res://UI Elements/player UI/flasks.gd" id="2_8m5fj"]
+
+[node name="Player UI" type="CanvasLayer"]
+
+[node name="Player Health Bar" parent="." instance=ExtResource("1_kp0om")]
+offset_left = 39.0
+offset_top = 9.0
+offset_right = 39.0
+offset_bottom = 9.0
+
+[node name="Flasks" type="HBoxContainer" parent="."]
+offset_left = 10.0
+offset_top = 15.0
+offset_right = 26.0
+offset_bottom = 31.0
+theme_override_constants/separation = -5
+script = ExtResource("2_8m5fj")
+flaskCount = 3

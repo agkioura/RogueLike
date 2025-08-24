@@ -4,3 +4,6 @@
 
 [node name="HitboxComponent" type="Area2D"]
 script = ExtResource("1_ss1qm")
+
+[node name="iFrames" type="Timer" parent="."]
+one_shot = true
