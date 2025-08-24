@@ -1,0 +1,162 @@
+[gd_scene load_steps=17 format=3 uid="uid://eantyxvqtsvp"]
+
+[ext_resource type="Script" path="res://entities/PhysicsEntities/enemies/skeleton/skeleton.gd" id="1_3uwju"]
+[ext_resource type="PackedScene" uid="uid://cert0vcaupr07" path="res://utilities/state machine/state_machine.tscn" id="2_u7hwo"]
+[ext_resource type="PackedScene" uid="uid://bk3vrw2l0qroq" path="res://entities/PhysicsEntities/enemies/skeleton/states/patrol.tscn" id="3_dtgnp"]
+[ext_resource type="PackedScene" uid="uid://cpd4mbft0e73" path="res://entities/PhysicsEntities/enemies/skeleton/states/chase.tscn" id="4_11284"]
+[ext_resource type="PackedScene" uid="uid://d2m1cfvio00nm" path="res://utilities/Components/Hitbox Component/hitbox_component.tscn" id="5_rcsv7"]
+[ext_resource type="PackedScene" uid="uid://do6o5djrmjhhp" path="res://UI Elements/health bars/health_bar.tscn" id="6_hrnft"]
+[ext_resource type="PackedScene" uid="uid://cg82e1r8ck2jg" path="res://utilities/weapons/sword.tscn" id="7_ymtdt"]
+[ext_resource type="PackedScene" uid="uid://cm6xw7jnqxf4g" path="res://utilities/Components/Attack Component/attack_component.tscn" id="8_df7lb"]
+[ext_resource type="PackedScene" uid="uid://fnaly4wbnhwf" path="res://utilities/Components/Health Components/health_component.tscn" id="9_e20c7"]
+[ext_resource type="Texture2D" uid="uid://tgsk6712duh" path="res://assets/enemy sprites/skeleton.png" id="10_eq57p"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_avlp1"]
+radius = 6.0
+height = 16.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nyto4"]
+radius = 7.0
+height = 28.0
+
+[sub_resource type="Animation" id="Animation_tvxjm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("EnemySprite:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_wnj5c"]
+resource_name = "walk"
+length = 0.533337
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.266667, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("EnemySprite:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.366667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0872665, -0.191986]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_eiaup"]
+_data = {
+"RESET": SubResource("Animation_tvxjm"),
+"walk": SubResource("Animation_wnj5c")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0a2od"]
+radius = 156.115
+
+[node name="Skeleton" type="CharacterBody2D" node_paths=PackedStringArray("stateMachine", "animation_player", "enemy_sprite")]
+y_sort_enabled = true
+collision_layer = 5
+collision_mask = 6
+script = ExtResource("1_3uwju")
+stateMachine = NodePath("StateMachine")
+animation_player = NodePath("AnimationPlayer")
+enemy_sprite = NodePath("EnemySprite")
+speed = 50.0
+
+[node name="StateMachine" parent="." node_paths=PackedStringArray("startingState") instance=ExtResource("2_u7hwo")]
+startingState = NodePath("Patrol")
+
+[node name="Patrol" parent="StateMachine" node_paths=PackedStringArray("chase", "nav", "agroRadius") instance=ExtResource("3_dtgnp")]
+chase = NodePath("../Chase")
+nav = NodePath("../../NavigationAgent2D")
+agroRadius = NodePath("../../agroRadius")
+
+[node name="Chase" parent="StateMachine" node_paths=PackedStringArray("patrol", "nav", "agroRadius") instance=ExtResource("4_11284")]
+patrol = NodePath("../Patrol")
+nav = NodePath("../../NavigationAgent2D")
+agroRadius = NodePath("../../agroRadius")
+
+[node name="wallCollision" type="CollisionShape2D" parent="."]
+position = Vector2(0, 8)
+shape = SubResource("CapsuleShape2D_avlp1")
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("5_rcsv7")]
+visible = false
+healthComponent = NodePath("../HealthComponent")
+
+[node name="wallCollision2" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(0, 2)
+shape = SubResource("CapsuleShape2D_nyto4")
+
+[node name="HealthBar" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("6_hrnft")]
+offset_left = -7.0
+offset_top = -16.0
+offset_right = 7.0
+offset_bottom = -13.0
+healthComponent = NodePath("../HealthComponent")
+
+[node name="Weapon" parent="." node_paths=PackedStringArray("attack") instance=ExtResource("7_ymtdt")]
+weaponType = 2
+attack = NodePath("AttackComponent")
+chargeTime = 0.6
+
+[node name="AttackComponent" parent="Weapon" instance=ExtResource("8_df7lb")]
+dmg = 5.0
+attackSpeed = 0.3
+knockbackForce = 0
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_postprocessing = 1
+avoidance_enabled = true
+
+[node name="HealthComponent" parent="." instance=ExtResource("9_e20c7")]
+maxHealth = 100.0
+health = 100.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_eiaup")
+}
+
+[node name="EnemySprite" type="Sprite2D" parent="."]
+position = Vector2(-0.5, 0)
+texture = ExtResource("10_eq57p")
+offset = Vector2(-0.5, 0)
+hframes = 4
+frame = 2
+
+[node name="agroRadius" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="agroRadius"]
+shape = SubResource("CircleShape2D_0a2od")

@@ -1,9 +1,6 @@
 class_name Enemy extends PhysicsEnity
 
 @export var speed: float
-@export var stateMachine: StateMachine
-@export var animation_player: AnimationPlayer
-@export var enemy_sprite: Sprite2D
 
 var target: PhysicsEnity
 var hitDirection: Vector2
@@ -15,17 +12,17 @@ func setTarget(target: PhysicsEnity) -> void:
 func clearTarget() -> void:
 	self.target = null
 
-func _init() -> void:
-	super("enemy")
+func _init(id: String) -> void:
+	super(id)
 	
 func _ready() -> void:
-	stateMachine.initialize(self)
+	pass
 
 func _unhandled_input(event: InputEvent) -> void:
-	stateMachine.processInput(event)
+	pass
 	
 func _physics_process(delta: float) -> void:
-	stateMachine.processPhysics(delta)
+	pass
 	
 func _process(delta: float) -> void:
-	stateMachine.processFrame(delta)
+	pass

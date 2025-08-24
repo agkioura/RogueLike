@@ -2,23 +2,33 @@ class_name Patrol extends State
 
 @export var chase: State
 
-var rng: RandomNumberGenerator = RandomNumberGenerator.new()
+var rng: RandomNumberGenerator = Global.rng
+
+@onready var waitTimer: Timer = $Timer
 
 @export var nav: NavigationAgent2D
-@export var waitTimer: Timer
 @export var agroRadius: Area2D
+var spawnCords: Vector2
 
 func _ready() -> void:
-	if waitTimer: waitTimer.timeout.connect(changePoint)
+	waitTimer.timeout.connect(changePoint)
 	if nav:
 		nav.navigation_finished.connect(_on_navigation_agent_2d_navigation_finished)
+		nav.velocity_computed.connect(_on_navigation_agent_2d_velocity_computed)
 	if agroRadius:
 		agroRadius.body_entered.connect(_on_body_entered)
 
 func getRandomPoint() -> Vector2:
-	return Vector2(rng.randi_range(parent.global_position.x - 100, parent.global_position.x + 100), rng.randf_range(parent.global_position.y - 100, parent.global_position.y + 100))
+	var R = 32
+	var r = R * sqrt(rng.randf())
+	var theta = rng.randf() * 2 * PI
+
+	var x = spawnCords.x + r * cos(theta)
+	var y = spawnCords.y + r * sin(theta)
+	return Vector2(x, y)
 	
 func enterState() -> void:
+	spawnCords = parent.global_position
 	if nav:
 		changePoint()
 	
@@ -32,12 +42,8 @@ func processPhysics(delta : float) -> State:
 		return null
 		
 	var next_point = nav.get_next_path_position()
-	if abs(parent.global_position.length() - next_point.length()) < 1:
-		parent.velocity = Vector2.ZERO
-	else:
-		var direction = global_position.direction_to(next_point)
-		parent.velocity = direction * parent.speed * 0.6
-	parent.move_and_slide()
+	var direction = global_position.direction_to(next_point)
+	nav.velocity = direction * parent.speed * 0.6
 	return null
 	
 func processFrame(delta: float) -> State:
@@ -52,12 +58,16 @@ func processFrame(delta: float) -> State:
 	
 func _on_body_entered(body: Node2D) -> void:
 	if body is Player:
+		pass
 		parent.target = body
 
 func _on_navigation_agent_2d_navigation_finished() -> void:
-	#parent.animation_player.stop()
-	waitTimer.wait_time = randf_range(2, 3)
-	waitTimer.start()
+	parent.animation_player.stop()
+	waitTimer.start(randf_range(2, 3))
+	
+func _on_navigation_agent_2d_velocity_computed(safeVelocity) -> void:
+	parent.velocity = parent.velocity.move_toward(safeVelocity, 100)
+	parent.move_and_slide()
 
 func changePoint() -> void:
 	nav.target_position = getRandomPoint()

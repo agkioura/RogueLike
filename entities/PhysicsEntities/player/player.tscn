@@ -19,8 +19,8 @@ radius = 6.0
 height = 16.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_c4gvl"]
-radius = 7.0
-height = 28.0
+radius = 4.0
+height = 22.0
 
 [sub_resource type="Animation" id="Animation_tvxjm"]
 length = 0.001
@@ -75,7 +75,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.366667),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [0.0, 0.191986, -0.191986]
+"values": [0.0, 0.174533, -0.174533]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_eiaup"]
@@ -130,6 +130,13 @@ attack = NodePath("AttackComponent")
 dmg = 20.0
 knockbackForce = 0
 
+[node name="PlayerSprite" type="Sprite2D" parent="."]
+y_sort_enabled = true
+texture = ExtResource("11_sfaie")
+offset = Vector2(-0.5, 0)
+hframes = 4
+frame = 2
+
 [node name="wallCollision" type="CollisionShape2D" parent="."]
 position = Vector2(0, 8)
 shape = SubResource("CapsuleShape2D_ey0pn")
@@ -149,10 +156,3 @@ shape = SubResource("CapsuleShape2D_c4gvl")
 libraries = {
 "": SubResource("AnimationLibrary_eiaup")
 }
-
-[node name="PlayerSprite" type="Sprite2D" parent="."]
-y_sort_enabled = true
-texture = ExtResource("11_sfaie")
-offset = Vector2(-0.5, 0)
-hframes = 4
-frame = 2

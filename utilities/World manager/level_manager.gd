@@ -137,7 +137,11 @@ func generateFloor():
 	roomCount -= 1
 	currentRoom = grid[start.y][start.x]
 	currentRoom.type = "spawn"
-	generateDoors(currentRoom, roomQueue)
+	currentRoom.doorBitMap[0] = 1
+	roomQueue.push_back(Vector2(
+			currentRoom.gridIndex.x,
+			currentRoom.gridIndex.y + -1
+		))
 	var nextRoom: Vector2
 	while (roomCount > 0 && not roomQueue.is_empty()):
 		nextRoom = roomQueue.pop_front()

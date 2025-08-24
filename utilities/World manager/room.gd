@@ -43,9 +43,9 @@ func createEnemies() -> void:
 	for i in range(enemyCount):
 		var enemy
 		if i < 2:
-			enemy = load("res://entities/PhysicsEntities/enemies/bat.tscn").instantiate()
+			enemy = load("res://entities/PhysicsEntities/enemies/bat/bat.tscn").instantiate()
 		else:
-			enemy = load("res://entities/PhysicsEntities/enemies/enemy.tscn").instantiate()
+			enemy = load("res://entities/PhysicsEntities/enemies/skeleton/skeleton.tscn").instantiate()
 		match i:
 			0:
 				enemy.global_position = spawn_point_1.global_position
