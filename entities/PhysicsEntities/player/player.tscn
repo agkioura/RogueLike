@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dopx06yy437aa"]
+[gd_scene load_steps=20 format=3 uid="uid://dopx06yy437aa"]
 
 [ext_resource type="Script" path="res://entities/PhysicsEntities/player/player.gd" id="1_xxrmx"]
 [ext_resource type="PackedScene" uid="uid://d2m1cfvio00nm" path="res://utilities/Components/Hitbox Component/hitbox_component.tscn" id="2_u6h0l"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://cm6xw7jnqxf4g" path="res://utilities/Components/Attack Component/attack_component.tscn" id="9_s711v"]
 [ext_resource type="PackedScene" uid="uid://fnaly4wbnhwf" path="res://utilities/Components/Health Components/health_component.tscn" id="11_8614u"]
 [ext_resource type="Texture2D" uid="uid://bi407vwvh6h5i" path="res://assets/player sprites/knight.png" id="11_sfaie"]
+[ext_resource type="PackedScene" uid="uid://bsjy4nfyia2vq" path="res://utilities/Components/Interactable Component/interacting_component.tscn" id="14_s8g0c"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ey0pn"]
 radius = 6.0
@@ -156,3 +157,5 @@ shape = SubResource("CapsuleShape2D_c4gvl")
 libraries = {
 "": SubResource("AnimationLibrary_eiaup")
 }
+
+[node name="InteractingComponent" parent="." instance=ExtResource("14_s8g0c")]

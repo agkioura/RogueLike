@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://d1dlstndoj870"]
+
+[ext_resource type="Script" path="res://entities/StaticEntities/item/item.gd" id="1_6b5j5"]
+[ext_resource type="PackedScene" uid="uid://b8nvogr3fm1fe" path="res://utilities/Components/Interactable Component/interactable.tscn" id="2_qtxbj"]
+[ext_resource type="Texture2D" uid="uid://b6u7b7hnxjmq3" path="res://icon.svg" id="3_y4b5q"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kvvfk"]
+radius = 44.0
+
+[node name="Item" type="Node2D"]
+script = ExtResource("1_6b5j5")
+
+[node name="interactable" parent="." instance=ExtResource("2_qtxbj")]
+interact_name = "Item"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="interactable"]
+shape = SubResource("CircleShape2D_kvvfk")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-1.90735e-06, -3.8147e-06)
+scale = Vector2(0.53125, 0.515625)
+texture = ExtResource("3_y4b5q")
