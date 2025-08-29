@@ -164,3 +164,4 @@ func renderMap():
 			var width = room.width
 			var height = room.height
 			room.map.global_position = Vector2(j * width,i * height)
+			room.global_position.y -= 8

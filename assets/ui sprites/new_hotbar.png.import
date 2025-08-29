@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dx68m3knf4xk7"
-path="res://.godot/imported/flask_sprite.png-6c211640fc1c85d9865ec0309ffa4557.ctex"
+uid="uid://dc17g5l8dfgx8"
+path="res://.godot/imported/new_hotbar.png-ea25cdf2c612f1661de8ee1576e91ec5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ui sprites/flask_sprite.png"
-dest_files=["res://.godot/imported/flask_sprite.png-6c211640fc1c85d9865ec0309ffa4557.ctex"]
+source_file="res://assets/ui sprites/new_hotbar.png"
+dest_files=["res://.godot/imported/new_hotbar.png-ea25cdf2c612f1661de8ee1576e91ec5.ctex"]
 
 [params]
 
