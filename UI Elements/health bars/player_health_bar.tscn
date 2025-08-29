@@ -48,5 +48,17 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_1si1k")
 value = 100.0
 show_percentage = false
 
-[node name="health bar layer" type="Sprite2D" parent="."]
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_repeat = 2
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -32.0
+offset_top = -16.0
+offset_right = 32.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("2_lbe4j")
