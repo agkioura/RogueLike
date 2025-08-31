@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://gvxmjcbxy15e"]
 
-[ext_resource type="Script" path="res://entities/PhysicsEntities/enemies/bat/states/bat_patrol.gd" id="1_cda5s"]
+[ext_resource type="Script" uid="uid://dijqanu7mxk40" path="res://entities/PhysicsEntities/enemies/bat/states/bat_patrol.gd" id="1_cda5s"]
 
 [node name="BatPatrol" type="Node2D"]
 script = ExtResource("1_cda5s")

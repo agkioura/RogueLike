@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://sah6taq8jlpl"]
 
-[ext_resource type="Script" path="res://utilities/weapons/melee.gd" id="1_jfibx"]
+[ext_resource type="Script" uid="uid://bknka465bf26j" path="res://utilities/weapons/melee.gd" id="1_jfibx"]
 [ext_resource type="Texture2D" uid="uid://caycpqjxhbmyw" path="res://assets/enemy sprites/bat_attack.png" id="1_kbret"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hq7xm"]
@@ -48,7 +48,7 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1yc5p"]
 _data = {
-"attack_dash": SubResource("Animation_u22c6")
+&"attack_dash": SubResource("Animation_u22c6")
 }
 
 [node name="Meelee" type="Node2D"]

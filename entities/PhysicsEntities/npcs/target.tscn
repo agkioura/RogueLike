@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://ba8o7c1uapsbw"]
 
-[ext_resource type="Script" path="res://entities/PhysicsEntities/npcs/target.gd" id="1_g161w"]
+[ext_resource type="Script" uid="uid://bglg4cellym0i" path="res://entities/PhysicsEntities/npcs/target.gd" id="1_g161w"]
 [ext_resource type="PackedScene" uid="uid://d2m1cfvio00nm" path="res://utilities/Components/Hitbox Component/hitbox_component.tscn" id="2_sbvul"]
 [ext_resource type="PackedScene" uid="uid://dropd42ko2su7" path="res://utilities/state machine/state_manager.tscn" id="4_nf1sx"]
 [ext_resource type="PackedScene" uid="uid://fnaly4wbnhwf" path="res://utilities/Components/Health Components/health_component.tscn" id="4_t0a1v"]

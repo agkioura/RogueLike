@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=3 uid="uid://eantyxvqtsvp"]
 
-[ext_resource type="Script" path="res://entities/PhysicsEntities/enemies/skeleton/skeleton.gd" id="1_3uwju"]
+[ext_resource type="Script" uid="uid://dkpf0l2tiyjxy" path="res://entities/PhysicsEntities/enemies/skeleton/skeleton.gd" id="1_3uwju"]
 [ext_resource type="PackedScene" uid="uid://cert0vcaupr07" path="res://utilities/state machine/state_machine.tscn" id="2_u7hwo"]
 [ext_resource type="PackedScene" uid="uid://bk3vrw2l0qroq" path="res://entities/PhysicsEntities/enemies/skeleton/states/patrol.tscn" id="3_dtgnp"]
 [ext_resource type="PackedScene" uid="uid://cpd4mbft0e73" path="res://entities/PhysicsEntities/enemies/skeleton/states/chase.tscn" id="4_11284"]
@@ -77,8 +77,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_eiaup"]
 _data = {
-"RESET": SubResource("Animation_tvxjm"),
-"walk": SubResource("Animation_wnj5c")
+&"RESET": SubResource("Animation_tvxjm"),
+&"walk": SubResource("Animation_wnj5c")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0a2od"]

@@ -1,17 +1,17 @@
 [gd_scene load_steps=20 format=3 uid="uid://c0kh1de3t1a6a"]
 
-[ext_resource type="Script" path="res://entities/PhysicsEntities/enemies/enemy.gd" id="1_4kv7i"]
+[ext_resource type="Script" uid="uid://dhsnfhfbci5lc" path="res://entities/PhysicsEntities/enemies/enemy.gd" id="1_4kv7i"]
 [ext_resource type="Texture2D" uid="uid://chh61bfrda5rh" path="res://assets/enemy sprites/bat_anim.png" id="2_lgm0a"]
 [ext_resource type="PackedScene" uid="uid://cert0vcaupr07" path="res://utilities/state machine/state_machine.tscn" id="4_2dadt"]
-[ext_resource type="PackedScene" uid="uid://21te3i02dnhu" path="res://utilities/state machine/States/AttackStates/charge_attack.tscn" id="4_biqq0"]
-[ext_resource type="PackedScene" uid="uid://bk3vrw2l0qroq" path="res://utilities/state machine/States/MoveStates/patrol.tscn" id="5_o2md2"]
-[ext_resource type="PackedScene" uid="uid://cpd4mbft0e73" path="res://utilities/state machine/States/MoveStates/chase.tscn" id="5_q4408"]
+[ext_resource type="PackedScene" uid="uid://21te3i02dnhu" path="res://entities/PhysicsEntities/enemies/bat/states/bat_charge_attack.tscn" id="4_biqq0"]
+[ext_resource type="PackedScene" uid="uid://bk3vrw2l0qroq" path="res://entities/PhysicsEntities/enemies/skeleton/states/patrol.tscn" id="5_o2md2"]
+[ext_resource type="PackedScene" uid="uid://cpd4mbft0e73" path="res://entities/PhysicsEntities/enemies/skeleton/states/chase.tscn" id="5_q4408"]
 [ext_resource type="PackedScene" uid="uid://bwh8l57nscl0k" path="res://utilities/state machine/States/AttackStates/attack.tscn" id="6_6ubwt"]
 [ext_resource type="PackedScene" uid="uid://sah6taq8jlpl" path="res://utilities/weapons/melee.tscn" id="6_w77re"]
 [ext_resource type="PackedScene" uid="uid://cm6xw7jnqxf4g" path="res://utilities/Components/Attack Component/attack_component.tscn" id="7_046nr"]
 [ext_resource type="PackedScene" uid="uid://do6o5djrmjhhp" path="res://UI Elements/health bars/health_bar.tscn" id="10_ipl0w"]
-[ext_resource type="Script" path="res://utilities/Components/Hitbox Component/hitbox_component.gd" id="11_edra7"]
-[ext_resource type="Script" path="res://utilities/Components/Health Components/healthComponent.gd" id="12_vhj53"]
+[ext_resource type="Script" uid="uid://bgb7lc847bjfe" path="res://utilities/Components/Hitbox Component/hitbox_component.gd" id="11_edra7"]
+[ext_resource type="Script" uid="uid://dcmrvqy712ia1" path="res://utilities/Components/Health Components/healthComponent.gd" id="12_vhj53"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a5i10"]
 radius = 3.0
@@ -51,8 +51,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kqrof"]
 _data = {
-"RESET": SubResource("Animation_2smm4"),
-"walk": SubResource("Animation_a36sb")
+&"RESET": SubResource("Animation_2smm4"),
+&"walk": SubResource("Animation_a36sb")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mn6gg"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=21 format=3 uid="uid://dopx06yy437aa"]
 
-[ext_resource type="Script" path="res://entities/PhysicsEntities/player/player.gd" id="1_xxrmx"]
+[ext_resource type="Script" uid="uid://kkcs2jmsg4l7" path="res://entities/PhysicsEntities/player/player.gd" id="1_xxrmx"]
 [ext_resource type="PackedScene" uid="uid://d2m1cfvio00nm" path="res://utilities/Components/Hitbox Component/hitbox_component.tscn" id="2_u6h0l"]
 [ext_resource type="PackedScene" uid="uid://dropd42ko2su7" path="res://utilities/state machine/state_manager.tscn" id="3_cmj32"]
 [ext_resource type="PackedScene" uid="uid://cert0vcaupr07" path="res://utilities/state machine/state_machine.tscn" id="3_ywb0m"]
@@ -82,8 +82,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_eiaup"]
 _data = {
-"RESET": SubResource("Animation_tvxjm"),
-"walk": SubResource("Animation_wnj5c")
+&"RESET": SubResource("Animation_tvxjm"),
+&"walk": SubResource("Animation_wnj5c")
 }
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("hitbox_component", "health_component", "animation_player")]
