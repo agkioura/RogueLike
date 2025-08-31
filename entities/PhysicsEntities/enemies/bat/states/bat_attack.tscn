@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b2p5jbh3d4nvb"]
 
-[ext_resource type="Script" path="res://entities/PhysicsEntities/enemies/bat/states/bat_attack.gd" id="1_nkc3w"]
+[ext_resource type="Script" uid="uid://cxqfovoyrabsk" path="res://entities/PhysicsEntities/enemies/bat/states/bat_attack.gd" id="1_nkc3w"]
 
 [node name="BatAttack" type="Node2D"]
 script = ExtResource("1_nkc3w")

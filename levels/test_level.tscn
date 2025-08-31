@@ -1,13 +1,15 @@
 [gd_scene load_steps=5 format=3 uid="uid://jqant3t12efe"]
 
 [ext_resource type="PackedScene" uid="uid://dopx06yy437aa" path="res://entities/PhysicsEntities/player/player.tscn" id="1_1vnm1"]
-[ext_resource type="PackedScene" path="res://levels/tilemap layers/test_room.tscn" id="2_8170x"]
 [ext_resource type="PackedScene" uid="uid://eantyxvqtsvp" path="res://entities/PhysicsEntities/enemies/skeleton/skeleton.tscn" id="2_jmeft"]
 [ext_resource type="PackedScene" uid="uid://bcl1f5mraax2f" path="res://utilities/World manager/level_manager.tscn" id="3_k4e1a"]
 
+[sub_resource type="Resource" id="Resource_gmgay"]
+metadata/__load_path__ = "res://levels/tilemap layers/test_room.tscn"
+
 [node name="testLevel" type="Node2D"]
 
-[node name="TestRoom" parent="." instance=ExtResource("2_8170x")]
+[node name="TestRoom" parent="."]
 
 [node name="LevelManager" parent="." instance=ExtResource("3_k4e1a")]
 

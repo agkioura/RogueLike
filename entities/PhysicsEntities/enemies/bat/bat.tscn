@@ -1,13 +1,13 @@
 [gd_scene load_steps=21 format=3 uid="uid://c0kh1de3t1a6a"]
 
-[ext_resource type="Script" path="res://entities/PhysicsEntities/enemies/bat/bat.gd" id="1_7qpuv"]
+[ext_resource type="Script" uid="uid://qpwpuwshfym7" path="res://entities/PhysicsEntities/enemies/bat/bat.gd" id="1_7qpuv"]
 [ext_resource type="PackedScene" uid="uid://cert0vcaupr07" path="res://utilities/state machine/state_machine.tscn" id="2_kbot6"]
 [ext_resource type="PackedScene" uid="uid://gvxmjcbxy15e" path="res://entities/PhysicsEntities/enemies/bat/states/bat_patrol.tscn" id="3_r0mvk"]
 [ext_resource type="PackedScene" uid="uid://21te3i02dnhu" path="res://entities/PhysicsEntities/enemies/bat/states/bat_charge_attack.tscn" id="4_6yd01"]
 [ext_resource type="PackedScene" uid="uid://b2p5jbh3d4nvb" path="res://entities/PhysicsEntities/enemies/bat/states/bat_attack.tscn" id="5_06dbq"]
 [ext_resource type="PackedScene" uid="uid://cm6xw7jnqxf4g" path="res://utilities/Components/Attack Component/attack_component.tscn" id="6_hyxjs"]
 [ext_resource type="PackedScene" uid="uid://do6o5djrmjhhp" path="res://UI Elements/health bars/health_bar.tscn" id="7_j10dp"]
-[ext_resource type="Script" path="res://utilities/Components/Health Components/healthComponent.gd" id="8_k3s7r"]
+[ext_resource type="Script" uid="uid://dcmrvqy712ia1" path="res://utilities/Components/Health Components/healthComponent.gd" id="8_k3s7r"]
 [ext_resource type="PackedScene" uid="uid://d2m1cfvio00nm" path="res://utilities/Components/Hitbox Component/hitbox_component.tscn" id="9_bucqf"]
 [ext_resource type="Texture2D" uid="uid://chh61bfrda5rh" path="res://assets/enemy sprites/bat_anim.png" id="10_p11d2"]
 [ext_resource type="Texture2D" uid="uid://caycpqjxhbmyw" path="res://assets/enemy sprites/bat_attack.png" id="11_q7o01"]
@@ -70,9 +70,9 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kqrof"]
 _data = {
-"RESET": SubResource("Animation_2smm4"),
-"charge_attack": SubResource("Animation_nexrf"),
-"walk": SubResource("Animation_a36sb")
+&"RESET": SubResource("Animation_2smm4"),
+&"charge_attack": SubResource("Animation_nexrf"),
+&"walk": SubResource("Animation_a36sb")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mn6gg"]
